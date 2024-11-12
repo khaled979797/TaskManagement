@@ -18,12 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Projects\Commands\Handlers\" />
-    <Folder Include="Features\Projects\Commands\Models\" />
-    <Folder Include="Features\Projects\Commands\Validators\" />
-    <Folder Include="Features\Projects\Queries\Handlers\" />
-    <Folder Include="Features\Projects\Queries\Models\" />
-    <Folder Include="Features\Projects\Queries\Responses\" />
     <Folder Include="Features\Comments\Commands\Handlers\" />
     <Folder Include="Features\Comments\Commands\Models\" />
     <Folder Include="Features\Comments\Commands\Validators\" />

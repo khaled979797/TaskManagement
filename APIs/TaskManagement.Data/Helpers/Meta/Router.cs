@@ -4,6 +4,7 @@
     {
         public const string SingleRoute = "/{id}";
         public const string Username = "/{username}";
+        public const string Name = "/{name}";
         public const string root = "Api";
         public const string version = "V1";
         public const string Rule = root + "/" + version + "/";
@@ -18,6 +19,18 @@
             public const string GetUserByUsername = Prefix + "/GetUserByUsername" + Username;
             public const string EditUser = Prefix + "/EditUser";
             public const string DeleteUser = Prefix + "/DeleteUser" + Username;
+        }
+
+        public static class ProjectRouting
+        {
+            public const string Prefix = Rule + "Project";
+            public const string AddProject = Prefix + "/AddProject";
+            public const string GetAllProjects = Prefix + "/GetAllProjects";
+            public const string GetProjectById = Prefix + "/GetProjectById" + SingleRoute;
+            public const string GetProjectByName = Prefix + "/GetProjectByName" + Name;
+            public const string EditProject = Prefix + "/EditProject";
+            public const string DeleteProjectById = Prefix + "/DeleteProjectById" + SingleRoute;
+            public const string DeleteProjectByName = Prefix + "/DeleteProjectByName" + Name;
         }
     }
 }
