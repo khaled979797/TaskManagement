@@ -23,7 +23,7 @@ namespace TaskManagement.Service.Repositories
 
         public async Task<RegisterUserResponse> RegisterUser(AppUser user, string password)
         {
-            var transact = await context.Database.BeginTransactionAsync();
+            await BeginTransactionAsync();
             try
             {
                 var checkEmailExist = await userManager.FindByEmailAsync(user.Email!);
@@ -37,12 +37,12 @@ namespace TaskManagement.Service.Repositories
                 await userManager.AddToRoleAsync(user, "User");
 
                 if (!result.Succeeded) return null!;
-                await transact.CommitAsync();
+                await CommitAsync();
                 return new RegisterUserResponse { UserName = user.UserName, Token = token };
             }
             catch
             {
-                await transact.RollbackAsync();
+                await RollBackAsync();
                 return null!;
             }
         }
@@ -61,7 +61,7 @@ namespace TaskManagement.Service.Repositories
 
         public async Task<string> EditUser(AppUser user)
         {
-            var transact = await context.Database.BeginTransactionAsync();
+            await BeginTransactionAsync();
             try
             {
                 var checkUser = await userManager.FindByIdAsync(user.Id.ToString());
@@ -71,19 +71,19 @@ namespace TaskManagement.Service.Repositories
                 checkUser.UserName = user.UserName;
                 checkUser.Email = user.Email;
                 await context.SaveChangesAsync();
-                await transact.CommitAsync();
+                await CommitAsync();
                 return "Success";
             }
             catch
             {
-                await transact.RollbackAsync();
+                await RollBackAsync();
                 return "Failed";
             }
         }
 
         public async Task<string> DeleteUser(string username)
         {
-            var transact = await context.Database.BeginTransactionAsync();
+            await BeginTransactionAsync();
             try
             {
                 var user = await userManager.FindByNameAsync(username);
@@ -93,37 +93,33 @@ namespace TaskManagement.Service.Repositories
                 if (!result.Succeeded) return "Failed";
 
                 await context.SaveChangesAsync();
-                await transact.CommitAsync();
+                await CommitAsync();
                 return "Success";
             }
             catch
             {
-                await transact.RollbackAsync();
+                await RollBackAsync();
                 return "Failed";
             }
         }
         public async Task<bool> IsUserNameExist(string username)
         {
-            var user = await GetTableNoTracking().Where(x => x.UserName == username).FirstOrDefaultAsync();
-            return user == null ? false : true;
+            return await GetTableNoTracking().Where(x => x.UserName == username).FirstOrDefaultAsync() != null;
         }
 
         public async Task<bool> IsUserNameExistExcludeSelf(string username, int id)
         {
-            var user = await GetTableNoTracking().Where(x => x.UserName == username && x.Id != id).FirstOrDefaultAsync();
-            return user == null ? false : true;
+            return await GetTableNoTracking().Where(x => x.UserName == username && x.Id != id).FirstOrDefaultAsync() != null;
         }
 
         public async Task<bool> IsEmailExist(string email)
         {
-            var user = await GetTableNoTracking().Where(x => x.Email == email).FirstOrDefaultAsync();
-            return user == null ? false : true;
+            return await GetTableNoTracking().Where(x => x.Email == email).FirstOrDefaultAsync() != null;
         }
 
         public async Task<bool> IsEmailExistExcludeSelf(string email, int id)
         {
-            var user = await GetTableNoTracking().Where(x => x.Email == email && x.Id != id).FirstOrDefaultAsync();
-            return user == null ? false : true;
+            return await GetTableNoTracking().Where(x => x.Email == email && x.Id != id).FirstOrDefaultAsync() != null;
         }
     }
 }
