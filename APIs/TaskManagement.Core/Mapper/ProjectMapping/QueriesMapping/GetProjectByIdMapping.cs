@@ -5,7 +5,7 @@ namespace TaskManagement.Core.Mapper.ProjectMapping
 {
     public partial class ProjectMappingProfile
     {
-        public void AddGetProjectByIdMapping()
+        public void GetProjectByIdMapping()
         {
             CreateMap<Project, GetProjectByIdResponse>();
         }

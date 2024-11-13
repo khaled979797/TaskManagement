@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -18,24 +18,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Comments\Commands\Handlers\" />
-    <Folder Include="Features\Comments\Commands\Models\" />
-    <Folder Include="Features\Comments\Commands\Validators\" />
-    <Folder Include="Features\Comments\Queries\Handlers\" />
-    <Folder Include="Features\Comments\Queries\Models\" />
-    <Folder Include="Features\Comments\Queries\Responses\" />
     <Folder Include="Features\Attachments\Commands\Handlers\" />
     <Folder Include="Features\Attachments\Commands\Models\" />
     <Folder Include="Features\Attachments\Commands\Validators\" />
     <Folder Include="Features\Attachments\Queries\Handlers\" />
     <Folder Include="Features\Attachments\Queries\Models\" />
-    <Folder Include="Features\Attachments\Queries\Responses\" />
-    <Folder Include="Features\Assignments\Commands\Handlers\" />
-    <Folder Include="Features\Assignments\Commands\Models\" />
-    <Folder Include="Features\Assignments\Commands\Validators\" />
-    <Folder Include="Features\Assignments\Queries\Handlers\" />
-    <Folder Include="Features\Assignments\Queries\Models\" />
-    <Folder Include="Features\Assignments\Queries\Responses\" />
+    <Folder Include="Features\Comments\Commands\Handlers\" />
+    <Folder Include="Features\Comments\Commands\Models\" />
+    <Folder Include="Features\Comments\Commands\Validators\" />
+    <Folder Include="Features\Comments\Queries\Handlers\" />
+    <Folder Include="Features\Comments\Queries\Models\" />
   </ItemGroup>
 
 </Project>

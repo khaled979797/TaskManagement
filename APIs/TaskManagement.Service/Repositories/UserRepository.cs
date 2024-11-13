@@ -81,12 +81,12 @@ namespace TaskManagement.Service.Repositories
             }
         }
 
-        public async Task<string> DeleteUser(string username)
+        public async Task<string> DeleteUser(int id)
         {
             await BeginTransactionAsync();
             try
             {
-                var user = await userManager.FindByNameAsync(username);
+                var user = await userManager.FindByIdAsync(id.ToString());
                 if (user is null) return "NotFound";
 
                 var result = await userManager.DeleteAsync(user);
@@ -104,22 +104,22 @@ namespace TaskManagement.Service.Repositories
         }
         public async Task<bool> IsUserNameExist(string username)
         {
-            return await GetTableNoTracking().Where(x => x.UserName == username).FirstOrDefaultAsync() != null;
+            return await GetTableNoTracking().FirstOrDefaultAsync(x => x.UserName == username) != null;
         }
 
         public async Task<bool> IsUserNameExistExcludeSelf(string username, int id)
         {
-            return await GetTableNoTracking().Where(x => x.UserName == username && x.Id != id).FirstOrDefaultAsync() != null;
+            return await GetTableNoTracking().FirstOrDefaultAsync(x => x.UserName == username && x.Id != id) != null;
         }
 
         public async Task<bool> IsEmailExist(string email)
         {
-            return await GetTableNoTracking().Where(x => x.Email == email).FirstOrDefaultAsync() != null;
+            return await GetTableNoTracking().FirstOrDefaultAsync(x => x.Email == email) != null;
         }
 
         public async Task<bool> IsEmailExistExcludeSelf(string email, int id)
         {
-            return await GetTableNoTracking().Where(x => x.Email == email && x.Id != id).FirstOrDefaultAsync() != null;
+            return await GetTableNoTracking().FirstOrDefaultAsync(x => x.Email == email && x.Id != id) != null;
         }
     }
 }

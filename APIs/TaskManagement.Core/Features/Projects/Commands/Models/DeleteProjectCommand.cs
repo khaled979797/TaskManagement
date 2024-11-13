@@ -3,10 +3,10 @@ using TaskManagement.Core.Helpers;
 
 namespace TaskManagement.Core.Features.Projects.Commands.Models
 {
-    public class DeleteProjectByIdCommand : IRequest<NewResponse<string>>
+    public class DeleteProjectCommand : IRequest<NewResponse<string>>
     {
         public int Id { get; set; }
-        public DeleteProjectByIdCommand(int id)
+        public DeleteProjectCommand(int id)
         {
             Id = id;
         }

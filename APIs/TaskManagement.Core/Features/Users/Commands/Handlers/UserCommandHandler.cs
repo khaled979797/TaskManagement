@@ -51,7 +51,7 @@ namespace TaskManagement.Core.Features.Users.Commands.Handlers
 
         public async Task<NewResponse<string>> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {
-            var result = await userRepository.DeleteUser(request.Username);
+            var result = await userRepository.DeleteUser(request.Id);
             switch (result)
             {
                 case "NotFound": return NotFound<string>();

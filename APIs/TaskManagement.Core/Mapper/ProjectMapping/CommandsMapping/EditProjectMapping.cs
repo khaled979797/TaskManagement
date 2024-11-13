@@ -5,7 +5,7 @@ namespace TaskManagement.Core.Mapper.ProjectMapping
 {
     public partial class ProjectMappingProfile
     {
-        public void AddEditProjectMapping()
+        public void EditProjectMapping()
         {
             CreateMap<EditProjectCommand, Project>();
         }

@@ -8,7 +8,7 @@ namespace TaskManagement.Service.Interfaces
         Task<RegisterUserResponse> RegisterUser(AppUser user, string password);
         Task<LoginUserResponse> LoginUser(string username, string password);
         Task<string> EditUser(AppUser user);
-        Task<string> DeleteUser(string username);
+        Task<string> DeleteUser(int id);
         Task<bool> IsUserNameExist(string username);
         Task<bool> IsUserNameExistExcludeSelf(string username, int id);
         Task<bool> IsEmailExist(string email);
