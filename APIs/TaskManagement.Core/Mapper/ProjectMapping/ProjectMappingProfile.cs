@@ -8,13 +8,12 @@ namespace TaskManagement.Core.Mapper.ProjectMapping
         {
             #region Commands
             AddProjectMapping();
-            AddEditProjectMapping();
+            EditProjectMapping();
             #endregion
 
             #region Queries
-            AddGetProjectsMapping();
-            AddGetProjectByIdMapping();
-            AddGetProjectByNameMapping();
+            GetProjectsMapping();
+            GetProjectByIdMapping();
             #endregion
         }
     }

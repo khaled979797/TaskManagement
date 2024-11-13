@@ -7,13 +7,13 @@ namespace TaskManagement.Core.Mapper.UserMapping
         public UserMappingProfile()
         {
             #region Commands
-            AddRegisterUserMapping();
-            AddEditUserMapping();
+            RegisterUserMapping();
+            EditUserMapping();
             #endregion
 
             #region Queries
-            AddGetUsersMapping();
-            AddGetUserByIdMapping();
+            GetUsersMapping();
+            GetUserByIdMapping();
             #endregion
         }
     }

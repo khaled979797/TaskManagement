@@ -9,8 +9,7 @@ namespace TaskManagement.Core.Features.Projects.Queries.Handlers
 {
     public class ProjectQueryHandler : ResponseHandler,
         IRequestHandler<GetProjectsQuery, NewResponse<List<GetProjectsResponse>>>,
-        IRequestHandler<GetProjectByIdQuery, NewResponse<GetProjectByIdResponse>>,
-        IRequestHandler<GetProjectByNameQuery, NewResponse<GetProjectByNameResponse>>
+        IRequestHandler<GetProjectByIdQuery, NewResponse<GetProjectByIdResponse>>
     {
         private readonly IProjectRepository projectRepository;
         private readonly IMapper mapper;
@@ -35,15 +34,6 @@ namespace TaskManagement.Core.Features.Projects.Queries.Handlers
             if (project is null) return NotFound<GetProjectByIdResponse>();
 
             var projectMapper = mapper.Map<GetProjectByIdResponse>(project);
-            return Success(projectMapper);
-        }
-
-        public async Task<NewResponse<GetProjectByNameResponse>> Handle(GetProjectByNameQuery request, CancellationToken cancellationToken)
-        {
-            var project = await projectRepository.GetProjectByName(request.Name);
-            if (project is null) return NotFound<GetProjectByNameResponse>();
-
-            var projectMapper = mapper.Map<GetProjectByNameResponse>(project);
             return Success(projectMapper);
         }
     }

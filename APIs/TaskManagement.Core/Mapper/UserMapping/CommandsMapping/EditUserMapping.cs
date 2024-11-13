@@ -5,7 +5,7 @@ namespace TaskManagement.Core.Mapper.UserMapping
 {
     public partial class UserMappingProfile
     {
-        public void AddEditUserMapping()
+        public void EditUserMapping()
         {
             CreateMap<EditUserCommand, AppUser>();
         }

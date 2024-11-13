@@ -12,8 +12,7 @@ namespace TaskManagement.Core.Features.Users.Queries.Handlers
 {
     public class UserQueryHandler : ResponseHandler,
         IRequestHandler<GetUsersQuery, NewResponse<List<GetUsersResponse>>>,
-        IRequestHandler<GetUserByIdQuery, NewResponse<GetUserByUsernameResponse>>,
-        IRequestHandler<GetUserByUsernameQuery, NewResponse<GetUserByUsernameResponse>>
+        IRequestHandler<GetUserByIdQuery, NewResponse<GetUserByIdResponse>>
     {
         private readonly IUserRepository userRepository;
         private readonly UserManager<AppUser> userManager;
@@ -34,19 +33,11 @@ namespace TaskManagement.Core.Features.Users.Queries.Handlers
             return Success(usersMapper);
         }
 
-        public async Task<NewResponse<GetUserByUsernameResponse>> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
+        public async Task<NewResponse<GetUserByIdResponse>> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
         {
             var user = await userManager.FindByIdAsync(request.Id.ToString());
-            if (user is null) return NotFound<GetUserByUsernameResponse>();
-            var userMapper = mapper.Map<GetUserByUsernameResponse>(user);
-            return Success(userMapper);
-        }
-
-        public async Task<NewResponse<GetUserByUsernameResponse>> Handle(GetUserByUsernameQuery request, CancellationToken cancellationToken)
-        {
-            var user = await userManager.FindByNameAsync(request.Username.ToString());
-            if (user is null) return NotFound<GetUserByUsernameResponse>();
-            var userMapper = mapper.Map<GetUserByUsernameResponse>(user);
+            if (user is null) return NotFound<GetUserByIdResponse>();
+            var userMapper = mapper.Map<GetUserByIdResponse>(user);
             return Success(userMapper);
         }
     }

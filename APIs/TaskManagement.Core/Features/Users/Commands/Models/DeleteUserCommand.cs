@@ -5,10 +5,10 @@ namespace TaskManagement.Core.Features.Users.Commands.Models
 {
     public class DeleteUserCommand : IRequest<NewResponse<string>>
     {
-        public string Username { get; set; }
-        public DeleteUserCommand(string username)
+        public int Id { get; set; }
+        public DeleteUserCommand(int id)
         {
-            Username = username;
+            Id = id;
         }
     }
 }

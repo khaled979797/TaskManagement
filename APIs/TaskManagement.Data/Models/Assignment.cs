@@ -1,4 +1,4 @@
-﻿using TaskManagement.Data.Helpers.Enums;
+﻿using TaskManagement.Data.Enums;
 
 namespace TaskManagement.Data.Models
 {

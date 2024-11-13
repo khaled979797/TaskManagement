@@ -4,7 +4,7 @@ using TaskManagement.Data.Responses.Users.Queries;
 
 namespace TaskManagement.Core.Features.Users.Queries.Models
 {
-    public class GetUserByIdQuery : IRequest<NewResponse<GetUserByUsernameResponse>>
+    public class GetUserByIdQuery : IRequest<NewResponse<GetUserByIdResponse>>
     {
         public int Id { get; set; }
 
