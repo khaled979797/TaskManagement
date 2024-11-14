@@ -15,10 +15,10 @@ namespace TaskManagement.Core.Features.Users.Queries.Handlers
         IRequestHandler<GetUserByIdQuery, NewResponse<GetUserByIdResponse>>
     {
         private readonly IUserRepository userRepository;
-        private readonly UserManager<AppUser> userManager;
+        private readonly UserManager<User> userManager;
         private readonly IMapper mapper;
 
-        public UserQueryHandler(IUserRepository userRepository, UserManager<AppUser> userManager,
+        public UserQueryHandler(IUserRepository userRepository, UserManager<User> userManager,
             IMapper mapper)
         {
             this.userRepository = userRepository;

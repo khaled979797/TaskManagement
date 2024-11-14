@@ -6,12 +6,12 @@ namespace TaskManagement.Service.Seeders
 {
     public static class UserSeeder
     {
-        public static async Task SeedAsync(UserManager<AppUser> userManager)
+        public static async Task SeedAsync(UserManager<User> userManager)
         {
             var usersCount = await userManager.Users.CountAsync();
             if (usersCount <= 0)
             {
-                var newUser = new AppUser
+                var newUser = new User
                 {
                     Name = "Admin",
                     UserName = "admin",

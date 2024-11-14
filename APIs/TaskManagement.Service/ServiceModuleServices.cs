@@ -26,9 +26,9 @@ namespace TaskManagement.Service
             #endregion
 
             #region Identity
-            services.AddIdentityCore<AppUser>().AddSignInManager<SignInManager<AppUser>>()
-                .AddRoles<AppRole>().AddRoleManager<RoleManager<AppRole>>()
-                .AddRoleValidator<RoleValidator<AppRole>>().AddEntityFrameworkStores<AppDbContext>();
+            services.AddIdentityCore<User>().AddSignInManager<SignInManager<User>>()
+                .AddRoles<Role>().AddRoleManager<RoleManager<Role>>()
+                .AddRoleValidator<RoleValidator<Role>>().AddEntityFrameworkStores<AppDbContext>();
             #endregion
 
             #region Dependencies

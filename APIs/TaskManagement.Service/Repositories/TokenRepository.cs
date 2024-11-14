@@ -12,15 +12,15 @@ namespace TaskManagement.Service.Repositories
     public class TokenRepository : ITokenRepository
     {
         private readonly SymmetricSecurityKey key;
-        private readonly UserManager<AppUser> userManager;
+        private readonly UserManager<User> userManager;
 
-        public TokenRepository(JwtSettings jwtSettings, UserManager<AppUser> userManager)
+        public TokenRepository(JwtSettings jwtSettings, UserManager<User> userManager)
         {
             key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Secret));
             this.userManager = userManager;
         }
 
-        public async Task<string> CreateToken(AppUser user)
+        public async Task<string> CreateToken(User user)
         {
             var claims = new List<Claim>
             {

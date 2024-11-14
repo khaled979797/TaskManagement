@@ -35,10 +35,10 @@ namespace TaskManagement.Core.Features.Assignments.Commands.Handlers
 
             switch (result)
             {
-                case "NotFound": return NotFound<string>("NotFound");
+                case "NotFound": return NotFound<string>();
                 case "UserNotFound": return NotFound<string>("UserNotFound");
                 case "ProjectNotFound": return NotFound<string>("ProjectNotFound");
-                case "Failed": return BadRequest<string>("Failed");
+                case "Failed": return BadRequest<string>();
                 default: return Success("");
             }
         }
@@ -48,8 +48,8 @@ namespace TaskManagement.Core.Features.Assignments.Commands.Handlers
             var result = await assignmentRepository.DeleteAssignmentById(request.Id);
             switch (result)
             {
-                case "NotFound": return NotFound<string>("NotFound");
-                case "Failed": return BadRequest<string>("Failed");
+                case "NotFound": return NotFound<string>();
+                case "Failed": return BadRequest<string>();
                 default: return Deleted<string>();
             }
         }

@@ -23,11 +23,6 @@
     <Folder Include="Features\Attachments\Commands\Validators\" />
     <Folder Include="Features\Attachments\Queries\Handlers\" />
     <Folder Include="Features\Attachments\Queries\Models\" />
-    <Folder Include="Features\Comments\Commands\Handlers\" />
-    <Folder Include="Features\Comments\Commands\Models\" />
-    <Folder Include="Features\Comments\Commands\Validators\" />
-    <Folder Include="Features\Comments\Queries\Handlers\" />
-    <Folder Include="Features\Comments\Queries\Models\" />
   </ItemGroup>
 
 </Project>
