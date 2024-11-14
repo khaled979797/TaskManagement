@@ -7,7 +7,7 @@ namespace TaskManagement.Core.Mapper.UserMapping
     {
         public void RegisterUserMapping()
         {
-            CreateMap<RegisterUserCommand, AppUser>();
+            CreateMap<RegisterUserCommand, User>();
         }
     }
 }

@@ -24,7 +24,7 @@ namespace TaskManagement.Core.Features.Users.Commands.Handlers
         }
         public async Task<NewResponse<RegisterUserResponse>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
-            var userMapper = mapper.Map<AppUser>(request);
+            var userMapper = mapper.Map<User>(request);
             var result = await userRepository.RegisterUser(userMapper, request.Password);
             if (result is not null) return Created(result);
             return BadRequest<RegisterUserResponse>();
@@ -39,7 +39,7 @@ namespace TaskManagement.Core.Features.Users.Commands.Handlers
 
         public async Task<NewResponse<string>> Handle(EditUserCommand request, CancellationToken cancellationToken)
         {
-            var user = mapper.Map<AppUser>(request);
+            var user = mapper.Map<User>(request);
             var result = await userRepository.EditUser(user);
             switch (result)
             {

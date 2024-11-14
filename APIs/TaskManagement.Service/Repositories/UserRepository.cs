@@ -7,21 +7,21 @@ using TaskManagement.Service.Interfaces;
 
 namespace TaskManagement.Service.Repositories
 {
-    public class UserRepository : GenericRepository<AppUser>, IUserRepository
+    public class UserRepository : GenericRepository<User>, IUserRepository
     {
-        private readonly UserManager<AppUser> userManager;
+        private readonly UserManager<User> userManager;
         private readonly ITokenRepository tokenRepository;
-        private readonly SignInManager<AppUser> signInManager;
+        private readonly SignInManager<User> signInManager;
 
-        public UserRepository(AppDbContext context, UserManager<AppUser> userManager,
-            ITokenRepository tokenRepository, SignInManager<AppUser> signInManager) : base(context)
+        public UserRepository(AppDbContext context, UserManager<User> userManager,
+            ITokenRepository tokenRepository, SignInManager<User> signInManager) : base(context)
         {
             this.userManager = userManager;
             this.tokenRepository = tokenRepository;
             this.signInManager = signInManager;
         }
 
-        public async Task<RegisterUserResponse> RegisterUser(AppUser user, string password)
+        public async Task<RegisterUserResponse> RegisterUser(User user, string password)
         {
             await BeginTransactionAsync();
             try
@@ -59,18 +59,20 @@ namespace TaskManagement.Service.Repositories
             return new LoginUserResponse { UserName = user.UserName, Token = token };
         }
 
-        public async Task<string> EditUser(AppUser user)
+        public async Task<string> EditUser(User user)
         {
             await BeginTransactionAsync();
             try
             {
-                var checkUser = await userManager.FindByIdAsync(user.Id.ToString());
-                if (checkUser is null) return "NotFound";
+                var userInDb = await userManager.FindByIdAsync(user.Id.ToString());
+                if (userInDb is null) return "NotFound";
 
-                checkUser.Name = user.Name;
-                checkUser.UserName = user.UserName;
-                checkUser.Email = user.Email;
-                await context.SaveChangesAsync();
+                userInDb.Name = user.Name;
+                userInDb.UserName = user.UserName;
+                userInDb.NormalizedUserName = user.UserName!.ToUpper();
+                userInDb.Email = user.Email;
+
+                await SaveChangesAsync();
                 await CommitAsync();
                 return "Success";
             }
@@ -92,7 +94,6 @@ namespace TaskManagement.Service.Repositories
                 var result = await userManager.DeleteAsync(user);
                 if (!result.Succeeded) return "Failed";
 
-                await context.SaveChangesAsync();
                 await CommitAsync();
                 return "Success";
             }

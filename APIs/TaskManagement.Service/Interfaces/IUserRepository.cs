@@ -3,11 +3,11 @@ using TaskManagement.Data.Responses.Users.Commands;
 
 namespace TaskManagement.Service.Interfaces
 {
-    public interface IUserRepository : IGenericRepository<AppUser>
+    public interface IUserRepository : IGenericRepository<User>
     {
-        Task<RegisterUserResponse> RegisterUser(AppUser user, string password);
+        Task<RegisterUserResponse> RegisterUser(User user, string password);
         Task<LoginUserResponse> LoginUser(string username, string password);
-        Task<string> EditUser(AppUser user);
+        Task<string> EditUser(User user);
         Task<string> DeleteUser(int id);
         Task<bool> IsUserNameExist(string username);
         Task<bool> IsUserNameExistExcludeSelf(string username, int id);

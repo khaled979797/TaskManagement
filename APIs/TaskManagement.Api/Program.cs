@@ -26,8 +26,8 @@ namespace TaskManagement.Api
 
             using (var scope = app.Services.CreateScope())
             {
-                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
-                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<AppRole>>();
+                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
+                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<Role>>();
                 await UserSeeder.SeedAsync(userManager);
                 await RoleSeeder.SeedAsync(roleManager);
             }

@@ -17,9 +17,9 @@ namespace TaskManagement.Service.Repositories
             await BeginTransactionAsync();
             try
             {
-                var user = await context.Users.FirstOrDefaultAsync(x => x.Id == assignment.AppUserId);
+                var user = await context.Users.FirstOrDefaultAsync(x => x.Id == assignment.UserId);
                 if (user is null) return null!;
-                var project = await context.Projects.FirstOrDefaultAsync(x => x.Id == assignment.ProjectId);
+                var project = await context.Projects!.FirstOrDefaultAsync(x => x.Id == assignment.ProjectId);
                 if (project is null) return null!;
 
                 var newAssignment = await AddAsync(assignment);
@@ -58,9 +58,9 @@ namespace TaskManagement.Service.Repositories
             await BeginTransactionAsync();
             try
             {
-                var user = await context.Users.FirstOrDefaultAsync(x => x.Id == assignment.AppUserId);
+                var user = await context.Users.FirstOrDefaultAsync(x => x.Id == assignment.UserId);
                 if (user is null) return "UserNotFound";
-                var project = await context.Projects.FirstOrDefaultAsync(x => x.Id == assignment.ProjectId);
+                var project = await context.Projects!.FirstOrDefaultAsync(x => x.Id == assignment.ProjectId);
                 if (project is null) return "ProjectNotFound";
 
                 var checkAssignmentExist = await GetTableNoTracking().FirstOrDefaultAsync(x => x.Id == assignment.Id);
@@ -79,12 +79,17 @@ namespace TaskManagement.Service.Repositories
 
         public async Task<List<Assignment>> GetAllAssignments()
         {
-            return await GetTableNoTracking().Include(x => x.User).Include(x => x.Project).ToListAsync();
+            return await GetTableNoTracking().Include(x => x.User).Include(x => x.Project)
+                .Include(x => x.Comments)!.ThenInclude(x => x.User)
+                .Include(x => x.Attachments)!.ThenInclude(x => x.User).ToListAsync();
         }
 
         public async Task<Assignment> GetAssignmentById(int id)
         {
-            return await GetTableNoTracking().Include(x => x.User).Include(x => x.Project).FirstOrDefaultAsync(x => x.Id == id);
+            return await GetTableNoTracking().Include(x => x.User).Include(x => x.Project)
+                .Include(x => x.Comments)!.ThenInclude(x => x.User)
+                .Include(x => x.Attachments)!.ThenInclude(x => x.User)
+                .FirstOrDefaultAsync(x => x.Id == id) ?? null!;
         }
 
         public async Task<bool> IsTitleExist(string title)

@@ -7,8 +7,7 @@ namespace TaskManagement.Core.Mapper.AssignmentMapping
     {
         public void EditAssignmentMapping()
         {
-            CreateMap<EditAssignmentCommand, Assignment>()
-                .ForMember(dst => dst.AppUserId, opt => opt.MapFrom(src => src.UserId));
+            CreateMap<EditAssignmentCommand, Assignment>();
         }
     }
 }

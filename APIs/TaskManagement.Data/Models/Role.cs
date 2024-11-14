@@ -2,7 +2,7 @@
 
 namespace TaskManagement.Data.Models
 {
-    public class AppRole : IdentityRole<int>
+    public class Role : IdentityRole<int>
     {
     }
 }
