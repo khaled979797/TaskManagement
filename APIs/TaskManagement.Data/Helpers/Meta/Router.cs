@@ -54,7 +54,6 @@
             public const string AddAttachment = Prefix + "/AddAttachment";
             public const string GetAllAttachments = Prefix + "/GetAllAttachments";
             public const string GetAttachmentById = Prefix + "/GetAttachmentById" + SingleRoute;
-            public const string EditAttachment = Prefix + "/EditAttachment";
             public const string DeleteAttachmentById = Prefix + "/DeleteAttachmentById" + SingleRoute;
         }
     }

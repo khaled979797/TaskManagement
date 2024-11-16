@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <Folder Include="Responses\Assignments\Commands\" />
+    <Folder Include="Responses\Attachments\Commands\" />
     <Folder Include="Responses\Comments\Commands\" />
     <Folder Include="Responses\Projects\Commands\" />
   </ItemGroup>

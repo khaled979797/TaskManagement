@@ -13,7 +13,7 @@ namespace TaskManagement.Core.Features.Comments.Commands.Validators
         public void ApplyValidationsRules()
         {
             RuleFor(x => x.Id)
-                .GreaterThan(0)
+                .GreaterThan(0).WithMessage("Id should be greater than zero")
                 .NotEmpty().WithMessage("Id should not be empty")
                 .NotNull().WithMessage("Id should not be null");
 

@@ -17,12 +17,4 @@
     <ProjectReference Include="..\TaskManagement.Service\TaskManagement.Service.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Attachments\Commands\Handlers\" />
-    <Folder Include="Features\Attachments\Commands\Models\" />
-    <Folder Include="Features\Attachments\Commands\Validators\" />
-    <Folder Include="Features\Attachments\Queries\Handlers\" />
-    <Folder Include="Features\Attachments\Queries\Models\" />
-  </ItemGroup>
-
 </Project>

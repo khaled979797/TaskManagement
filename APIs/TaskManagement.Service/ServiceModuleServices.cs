@@ -98,6 +98,13 @@ namespace TaskManagement.Service
                 });
             });
             #endregion
+
+            #region Cloudinary
+            var cloudinarySettings = new CloudinarySettings();
+            configuration.GetSection("cloudinarySettings").Bind(cloudinarySettings);
+            services.AddSingleton(cloudinarySettings);
+            #endregion
+
             return services;
         }
     }

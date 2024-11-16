@@ -3,6 +3,7 @@
     public class Attachment
     {
         public int Id { get; set; }
+        public string? PublicId { get; set; }
         public string? FilePath { get; set; }
         public DateTime TimeStamp { get; set; } = DateTime.Now;
         public int UserId { get; set; }
