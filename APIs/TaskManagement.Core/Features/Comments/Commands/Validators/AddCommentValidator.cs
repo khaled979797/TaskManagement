@@ -21,12 +21,12 @@ namespace TaskManagement.Core.Features.Comments.Commands.Validators
                 .NotNull().WithMessage("TimeStamp should not be null");
 
             RuleFor(x => x.UserId)
-                .GreaterThan(0)
+                .GreaterThan(0).WithMessage("UserId should be greater than zero")
                 .NotEmpty().WithMessage("AppUserId should not be empty")
                 .NotNull().WithMessage("AppUserId should not be null");
 
             RuleFor(x => x.AssignmentId)
-                .GreaterThan(0)
+                .GreaterThan(0).WithMessage("AssignmentId should be greater than zero")
                 .NotEmpty().WithMessage("AssignmentId should not be empty")
                 .NotNull().WithMessage("AssignmentId should not be null");
         }

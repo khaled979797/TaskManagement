@@ -18,7 +18,7 @@ namespace TaskManagement.Core.Features.Projects.Commands.Validators
         public void ApplyValidationsRules()
         {
             RuleFor(x => x.Id)
-                .GreaterThan(0)
+                .GreaterThan(0).WithMessage("Id should be greater than zero")
                 .NotEmpty().WithMessage("Name should not be empty")
                 .NotNull().WithMessage("Name should not be null");
 
