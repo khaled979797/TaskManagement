@@ -1,9 +1,11 @@
+using Hangfire;
 using Microsoft.AspNetCore.Identity;
 using TaskManagement.Core;
 using TaskManagement.Data;
 using TaskManagement.Data.Models;
 using TaskManagement.Service;
 using TaskManagement.Service.Seeders;
+using TaskManagement.Service.SignalR;
 
 namespace TaskManagement.Api
 {
@@ -47,7 +49,11 @@ namespace TaskManagement.Api
 
             app.UseAuthorization();
 
+            app.UseHangfireDashboard("/Dashboard", new DashboardOptions { DashboardTitle = "Schedule Dashboard" });
+
             app.MapControllers();
+
+            app.MapHub<NotificationHub>("NotificationHub");
 
             app.Run();
         }

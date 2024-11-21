@@ -7,10 +7,7 @@ namespace TaskManagement.Service.Repositories
 {
     public class AssignmentRepository : GenericRepository<Assignment>, IAssignmentRepository
     {
-
-        public AssignmentRepository(AppDbContext context) : base(context)
-        {
-        }
+        public AssignmentRepository(AppDbContext context) : base(context) { }
 
         public async Task<Assignment> AddAssignment(Assignment assignment)
         {
@@ -79,9 +76,11 @@ namespace TaskManagement.Service.Repositories
 
         public async Task<List<Assignment>> GetAllAssignments()
         {
-            return await GetTableNoTracking().Include(x => x.User).Include(x => x.Project)
+            var assignments = await GetTableNoTracking().Include(x => x.User).Include(x => x.Project)
                 .Include(x => x.Comments)!.ThenInclude(x => x.User)
                 .Include(x => x.Attachments)!.ThenInclude(x => x.User).ToListAsync();
+
+            return assignments.Count() > 0 ? assignments : null!;
         }
 
         public async Task<Assignment> GetAssignmentById(int id)

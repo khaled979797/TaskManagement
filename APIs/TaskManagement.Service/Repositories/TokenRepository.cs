@@ -13,7 +13,6 @@ namespace TaskManagement.Service.Repositories
     {
         private readonly SymmetricSecurityKey key;
         private readonly UserManager<User> userManager;
-
         public TokenRepository(JwtSettings jwtSettings, UserManager<User> userManager)
         {
             key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Secret));

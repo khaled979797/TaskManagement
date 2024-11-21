@@ -16,6 +16,7 @@
     <Folder Include="Responses\Attachments\Commands\" />
     <Folder Include="Responses\Comments\Commands\" />
     <Folder Include="Responses\Projects\Commands\" />
+    <Folder Include="Responses\Schedules\Commands\" />
   </ItemGroup>
 
 </Project>

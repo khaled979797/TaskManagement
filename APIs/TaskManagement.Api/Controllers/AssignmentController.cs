@@ -10,17 +10,17 @@ namespace TaskManagement.Api.Controllers
     public class AssignmentController : AppControllerBase
     {
         #region Commands
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(NewResponse<string>))]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(NewResponse<string>))]
         [HttpPost(Router.AssignmentRouting.AddAssignment)]
-        public async Task<IActionResult> Register(AddAssignmentCommand command)
+        public async Task<IActionResult> AddAssignment(AddAssignmentCommand command)
         {
             var response = await Mediator.Send(command);
             return NewResult(response);
         }
 
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(NewResponse<string>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(NewResponse<string>))]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(NewResponse<string>))]
         [HttpPut(Router.AssignmentRouting.EditAssignment)]
         public async Task<IActionResult> EditAssignment(EditAssignmentCommand command)
@@ -29,8 +29,8 @@ namespace TaskManagement.Api.Controllers
             return NewResult(response);
         }
 
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(NewResponse<string>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(NewResponse<string>))]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(NewResponse<string>))]
         [HttpDelete(Router.AssignmentRouting.DeleteAssignmentById)]
         public async Task<IActionResult> DeleteAssignmentById(int id)
@@ -42,7 +42,7 @@ namespace TaskManagement.Api.Controllers
         #endregion
 
         #region Queries
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(NewResponse<List<GetAssignmentsResponse>>))]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(NewResponse<List<GetAssignmentsResponse>>))]
         [HttpGet(Router.AssignmentRouting.GetAllAssignments)]
         public async Task<IActionResult> GetAllAssignments()
@@ -51,7 +51,7 @@ namespace TaskManagement.Api.Controllers
             return NewResult(response);
         }
 
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(NewResponse<GetAssignmentByIdResponse>))]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(NewResponse<GetAssignmentByIdResponse>))]
         [HttpGet(Router.AssignmentRouting.GetAssignmentById)]
         public async Task<IActionResult> GetAssignmentById(int id)

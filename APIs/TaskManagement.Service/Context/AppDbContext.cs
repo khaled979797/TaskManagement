@@ -13,6 +13,9 @@ namespace TaskManagement.Service.Context
         public DbSet<Assignment>? Assignments { get; set; }
         public DbSet<Comment>? Comments { get; set; }
         public DbSet<Attachment>? Attachments { get; set; }
+        public DbSet<Notification>? Notifications { get; set; }
+        public DbSet<Schedule>? Schedules { get; set; }
+
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

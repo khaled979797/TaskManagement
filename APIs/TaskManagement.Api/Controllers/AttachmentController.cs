@@ -10,7 +10,7 @@ namespace TaskManagement.Api.Controllers
     public class AttachmentController : AppControllerBase
     {
         #region Commands
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(NewResponse<string>))]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(NewResponse<string>))]
         [HttpPost(Router.AttachmentRouting.AddAttachment)]
         public async Task<IActionResult> AddAttachment(AddAttachmentCommand command)
@@ -19,7 +19,7 @@ namespace TaskManagement.Api.Controllers
             return NewResult(response);
         }
 
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(NewResponse<string>))]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(NewResponse<string>))]
         [HttpDelete(Router.AttachmentRouting.DeleteAttachmentById)]
         public async Task<IActionResult> DeleteAttachmentById(int id)
@@ -30,7 +30,7 @@ namespace TaskManagement.Api.Controllers
         #endregion
 
         #region Queries
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(NewResponse<List<GetAttachmentsResponse>>))]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(NewResponse<List<GetAttachmentsResponse>>))]
         [HttpGet(Router.AttachmentRouting.GetAllAttachments)]
         public async Task<IActionResult> GetAllAttachments()
@@ -39,7 +39,7 @@ namespace TaskManagement.Api.Controllers
             return NewResult(response);
         }
 
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(NewResponse<GetAttachmentByIdResponse>))]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(NewResponse<GetAttachmentByIdResponse>))]
         [HttpGet(Router.AttachmentRouting.GetAttachmentById)]
         public async Task<IActionResult> GetAttachmentById(int id)

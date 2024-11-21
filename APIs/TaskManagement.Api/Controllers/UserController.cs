@@ -10,7 +10,7 @@ namespace TaskManagement.Api.Controllers
     public class UserController : AppControllerBase
     {
         #region Commands
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(NewResponse<RegisterUserResponse>))]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(NewResponse<RegisterUserResponse>))]
         [HttpPost(Router.UserRouting.Register)]
         public async Task<IActionResult> Register(RegisterUserCommand command)
@@ -19,7 +19,7 @@ namespace TaskManagement.Api.Controllers
             return NewResult(response);
         }
 
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(NewResponse<LoginUserResponse>))]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(NewResponse<LoginUserResponse>))]
         [HttpPost(Router.UserRouting.Login)]
         public async Task<IActionResult> Login(LoginUserCommand command)
@@ -28,8 +28,8 @@ namespace TaskManagement.Api.Controllers
             return NewResult(response);
         }
 
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(NewResponse<string>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(NewResponse<string>))]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(NewResponse<string>))]
         [HttpPut(Router.UserRouting.EditUser)]
         public async Task<IActionResult> EditUser(EditUserCommand command)
@@ -38,8 +38,8 @@ namespace TaskManagement.Api.Controllers
             return NewResult(response);
         }
 
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(NewResponse<string>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(NewResponse<string>))]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(NewResponse<string>))]
         [HttpDelete(Router.UserRouting.DeleteUserById)]
         public async Task<IActionResult> DeleteUser(int id)
@@ -50,7 +50,7 @@ namespace TaskManagement.Api.Controllers
         #endregion
 
         #region Queries
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(NewResponse<List<GetUsersResponse>>))]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(NewResponse<List<GetUsersResponse>>))]
         [HttpGet(Router.UserRouting.GetAllUsers)]
         public async Task<IActionResult> GetAllUsers()
@@ -59,7 +59,7 @@ namespace TaskManagement.Api.Controllers
             return NewResult(response);
         }
 
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(NewResponse<GetUserByIdResponse>))]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(NewResponse<GetUserByIdResponse>))]
         [HttpGet(Router.UserRouting.GetUserById)]
         public async Task<IActionResult> GetUserById(int id)

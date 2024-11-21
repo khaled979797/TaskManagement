@@ -10,8 +10,8 @@ namespace TaskManagement.Api.Controllers
     public class CommentController : AppControllerBase
     {
         #region Commands
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(NewResponse<string>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(NewResponse<string>))]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(NewResponse<string>))]
         [HttpPost(Router.CommentRouting.AddComment)]
         public async Task<IActionResult> AddComment(AddCommentCommand command)
         {
@@ -19,8 +19,8 @@ namespace TaskManagement.Api.Controllers
             return NewResult(response);
         }
 
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(NewResponse<string>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(NewResponse<string>))]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(NewResponse<string>))]
         [HttpPut(Router.CommentRouting.EditComment)]
         public async Task<IActionResult> EditComment(EditCommentCommand command)
@@ -29,8 +29,8 @@ namespace TaskManagement.Api.Controllers
             return NewResult(response);
         }
 
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(NewResponse<string>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(NewResponse<string>))]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(NewResponse<string>))]
         [HttpDelete(Router.CommentRouting.DeleteCommentById)]
         public async Task<IActionResult> DeleteCommentById(int id)
@@ -41,7 +41,7 @@ namespace TaskManagement.Api.Controllers
         #endregion
 
         #region Queries
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(NewResponse<List<GetCommentsResponse>>))]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(NewResponse<List<GetCommentsResponse>>))]
         [HttpGet(Router.CommentRouting.GetAllComments)]
         public async Task<IActionResult> GetAllComments(int assignmentId)
@@ -50,7 +50,7 @@ namespace TaskManagement.Api.Controllers
             return NewResult(response);
         }
 
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(NewResponse<GetCommentByIdResponse>))]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(NewResponse<GetCommentByIdResponse>))]
         [HttpGet(Router.CommentRouting.GetCommentById)]
         public async Task<IActionResult> GetCommentById(int id)

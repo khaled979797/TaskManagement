@@ -27,8 +27,8 @@ namespace TaskManagement.Core.Features.Comments.Commands.Validators
 
             RuleFor(x => x.UserId)
                 .GreaterThan(0)
-                .NotEmpty().WithMessage("AppUserId should not be empty")
-                .NotNull().WithMessage("AppUserId should not be null");
+                .NotEmpty().WithMessage("UserId should not be empty")
+                .NotNull().WithMessage("UserId should not be null");
 
             RuleFor(x => x.AssignmentId)
                 .GreaterThan(0)
