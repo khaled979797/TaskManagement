@@ -8,7 +8,7 @@ namespace TaskManagement.Api.Controllers
     [ApiController]
     public class AppControllerBase : ControllerBase
     {
-        private IMediator mediator;
+        private IMediator? mediator;
         protected IMediator Mediator => mediator ??= HttpContext.RequestServices.GetService<IMediator>()!;
 
         public ObjectResult NewResult<T>(NewResponse<T> response)

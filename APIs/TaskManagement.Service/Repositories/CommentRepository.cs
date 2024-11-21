@@ -7,9 +7,7 @@ namespace TaskManagement.Service.Repositories
 {
     public class CommentRepository : GenericRepository<Comment>, ICommentRepository
     {
-        public CommentRepository(AppDbContext context) : base(context)
-        {
-        }
+        public CommentRepository(AppDbContext context) : base(context) { }
 
         public async Task<Comment> AddComment(Comment comment)
         {
@@ -81,7 +79,6 @@ namespace TaskManagement.Service.Repositories
             var comments = await GetTableNoTracking().Where(x => x.AssignmentId == assignmentId)
                 .Include(x => x.User).OrderBy(x => x.TimeStamp).ToListAsync();
             return comments.Count() > 0 ? comments : null!;
-
         }
 
         public async Task<Comment> GetCommentById(int id)

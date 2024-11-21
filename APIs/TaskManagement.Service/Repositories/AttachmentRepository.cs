@@ -12,7 +12,6 @@ namespace TaskManagement.Service.Repositories
     public class AttachmentRepository : GenericRepository<Attachment>, IAttachmentRepository
     {
         private readonly Cloudinary cloudinary;
-
         public AttachmentRepository(AppDbContext context, CloudinarySettings cloudinarySettings) : base(context)
         {
             var account = new Account
@@ -66,7 +65,8 @@ namespace TaskManagement.Service.Repositories
 
         public async Task<List<Attachment>> GetAllAttachments()
         {
-            return await GetTableNoTracking().Include(x => x.User).ToListAsync();
+            var attachments = await GetTableNoTracking().Include(x => x.User).ToListAsync();
+            return attachments.Count() > 0 ? attachments : null!;
         }
 
         public async Task<Attachment> GetAttachmentById(int id)

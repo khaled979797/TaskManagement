@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Hangfire;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -39,6 +40,8 @@ namespace TaskManagement.Service
             services.AddScoped<ICommentRepository, CommentRepository>();
             services.AddScoped<IAttachmentRepository, AttachmentRepository>();
             services.AddScoped<ITokenRepository, TokenRepository>();
+            services.AddScoped<INotificationRepository, NotificationRepository>();
+            services.AddScoped<IScheduleRepository, ScheduleRepository>();
             #endregion
 
             #region Jwt
@@ -103,6 +106,15 @@ namespace TaskManagement.Service
             var cloudinarySettings = new CloudinarySettings();
             configuration.GetSection("cloudinarySettings").Bind(cloudinarySettings);
             services.AddSingleton(cloudinarySettings);
+            #endregion
+
+            #region SignalR
+            services.AddSignalR();
+            #endregion
+
+            #region HangFire
+            services.AddHangfire(x => x.UseSqlServerStorage(configuration.GetConnectionString("DbContext")));
+            services.AddHangfireServer();
             #endregion
 
             return services;

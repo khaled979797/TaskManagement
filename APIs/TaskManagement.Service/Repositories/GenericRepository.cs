@@ -15,7 +15,7 @@ namespace TaskManagement.Service.Repositories
 
         public virtual async Task<T> GetByIdAsync(int id)
         {
-            return await context.Set<T>().FindAsync(id);
+            return await context.Set<T>().FindAsync(id) ?? null!;
         }
 
         public IQueryable<T> GetTableNoTracking()
@@ -47,6 +47,7 @@ namespace TaskManagement.Service.Repositories
             context.Set<T>().Remove(entity);
             await context.SaveChangesAsync();
         }
+
         public virtual async Task DeleteRangeAsync(ICollection<T> entities)
         {
             foreach (var entity in entities)

@@ -12,7 +12,6 @@ namespace TaskManagement.Service.Repositories
         private readonly UserManager<User> userManager;
         private readonly ITokenRepository tokenRepository;
         private readonly SignInManager<User> signInManager;
-
         public UserRepository(AppDbContext context, UserManager<User> userManager,
             ITokenRepository tokenRepository, SignInManager<User> signInManager) : base(context)
         {
@@ -103,6 +102,7 @@ namespace TaskManagement.Service.Repositories
                 return "Failed";
             }
         }
+
         public async Task<bool> IsUserNameExist(string username)
         {
             return await GetTableNoTracking().FirstOrDefaultAsync(x => x.UserName == username) != null;

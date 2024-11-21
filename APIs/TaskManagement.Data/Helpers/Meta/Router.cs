@@ -3,6 +3,7 @@
     public static class Router
     {
         public const string SingleRoute = "/{id}";
+        public const string UserId = "/{userId}";
         public const string root = "Api";
         public const string version = "V1";
         public const string Rule = root + "/" + version + "/";
@@ -55,6 +56,31 @@
             public const string GetAllAttachments = Prefix + "/GetAllAttachments";
             public const string GetAttachmentById = Prefix + "/GetAttachmentById" + SingleRoute;
             public const string DeleteAttachmentById = Prefix + "/DeleteAttachmentById" + SingleRoute;
+        }
+
+        public static class NotificationRouting
+        {
+            public const string Prefix = Rule + "Notification";
+            public const string AddNotification = Prefix + "/AddNotification";
+            public const string GetAllNotifications = Prefix + "/GetAllNotifications" + UserId;
+            public const string GetNotificationById = Prefix + "/GetNotificationById" + SingleRoute;
+            public const string DeleteAllNotifications = Prefix + "/DeleteAllNotifications" + UserId;
+            public const string DeleteNotificationById = Prefix + "/DeleteNotificationById" + SingleRoute;
+            public const string ReadAllNotifications = Prefix + "/ReadAllNotifications" + UserId;
+            public const string ReadNotificationById = Prefix + "/ReadNotificationById" + SingleRoute;
+            public const string UnreadAllNotifications = Prefix + "/UnreadAllNotifications" + UserId;
+            public const string UnreadNotificationById = Prefix + "/UnreadNotificationById" + SingleRoute;
+        }
+
+        public static class ScheduleRouting
+        {
+            public const string Prefix = Rule + "Schedule";
+            public const string AddSchedule = Prefix + "/AddSchedule";
+            public const string EditSchedule = Prefix + "/EditSchedule";
+            public const string DeleteScheduleById = Prefix + "/DeleteScheduleById" + SingleRoute;
+            public const string GetAllSchedules = Prefix + "/GetAllSchedules";
+            public const string GetAllSchedulesForUser = Prefix + "/GetAllSchedulesForUser" + UserId;
+            public const string GetScheduleById = Prefix + "/GetScheduleById" + SingleRoute;
         }
     }
 }

@@ -7,14 +7,12 @@ namespace TaskManagement.Service.Repositories
 {
     public class ProjectRepository : GenericRepository<Project>, IProjectRepository
     {
-        public ProjectRepository(AppDbContext context) : base(context)
-        {
-
-        }
+        public ProjectRepository(AppDbContext context) : base(context) { }
 
         public async Task<List<Project>> GetAllProjects()
         {
-            return await GetTableNoTracking().ToListAsync();
+            var projects = await GetTableNoTracking().ToListAsync();
+            return projects.Count() > 0 ? projects : null!;
         }
 
         public async Task<Project> GetProjectById(int id)
