@@ -32,14 +32,6 @@
         </ul>
       </div>
     }
-    <div class="dropdown" dropdown>
-      <a class="dropdown-toggle text-light text-decoration-none ms-2" dropdownToggle>Welcome</a>
-      <ul class="dropdown-menu mt-3" *dropdownMenu>
-        <li><a class="dropdown-item" routerLink="member/edit">Edit Profile</a></li>
-        <div class="dropdown-divider"></div>
-        <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
-      </ul>
-    </div>
     @if(!(userService.currentUser$ | async)){
       <form #loginForm="ngForm" class="d-flex" (submit)="login()">
         <input name="username" [(ngModel)]="loginModel.userName" class="form-control me-2" type="text" placeholder="Username">

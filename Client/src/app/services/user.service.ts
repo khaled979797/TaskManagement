@@ -1,12 +1,12 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment.development';
 import { IResponse } from '../models/iresponse';
+import { environment } from '../../environments/environment.development';
 import { IUser } from '../models/userModels/iuser';
-import { IRegisterUser } from '../models/userModels/iregister-user';
-import { ILoginUser } from '../models/userModels/ilogin-user';
-import { BehaviorSubject, map } from 'rxjs';
 import { IEditUser } from '../models/userModels/iedit-user';
+import { IRegisterUser } from '../models/userModels/iregister-user';
+import { BehaviorSubject, map } from 'rxjs';
+import { ILoginUser } from '../models/userModels/ilogin-user';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'

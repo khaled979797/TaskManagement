@@ -8,9 +8,11 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
+  standalone: true,
   imports: [CommonModule, FormsModule, RouterLink, BsDropdownModule],
   templateUrl: './nav.component.html',
-  styleUrl: './nav.component.css'
+  styleUrl: './nav.component.css',
+  providers: []
 })
 export class NavComponent {
   loginModel:ILoginUser = {} as ILoginUser;

@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { UserComponent } from "./components/user/user.component";
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { NavComponent } from "./components/nav/nav.component";
 import { IUser } from './models/userModels/iuser';
 import { UserService } from './services/user.service';
-import { NavComponent } from "./components/nav/nav.component";
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [NavComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit{
+export class AppComponent {
   constructor(private userService:UserService){}
 
   ngOnInit(): void {
