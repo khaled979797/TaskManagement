@@ -1,0 +1,26 @@
+<div class="container" *appHasRole="['Admin']" style="margin-top: 100px;">
+  <div class="row justify-content-center">
+    <table class="table table-hover table-dark table-striped">
+      <thead>
+        <tr>
+          <th style="width: 30%;"></th>
+          <th style="width: 30%;"></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(user of users; track user.userName){
+          <tr>
+            <td>{{user.userName}}</td>
+            <td><button (click)="deleteUser(user.id)" class="btn btn-outline-danger">Delete</button></td>
+          </tr>
+        }
+      </tbody>
+      <tfoot>
+        <tr>
+          <th style="width: 30%;"></th>
+          <th style="width: 30%;"></th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
