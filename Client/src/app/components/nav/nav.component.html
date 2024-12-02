@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-secondary">
+<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
   <div class="container">
-    <a class="navbar-brand" routerLink="/">Chatting App</a>
+    <a class="navbar-brand" routerLink="/">Task Management</a>
     <ul class="navbar-nav me-auto mb-2 mb-md-0">
       @if(userService.currentUser$ | async){
         <ng-container>
@@ -10,34 +10,54 @@
           <li class="nav-item">
             <a class="nav-link" routerLink="/tasks" routerLinkActive="active">Tasks</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/comments" routerLinkActive="active">Comments</a>
-          </li>
-          <!-- <li class="nav-item" *appHasRole="['Admin', 'Moderator']">
-            <a class="nav-link" routerLink="/admin" routerLinkActive="active">Attachments</a>
-          </li> -->
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/attachments" routerLinkActive="active">Attachments</a>
+          <li class="nav-item" *appHasRole="['Admin']">
+            <a class="nav-link" routerLink="/admin" routerLinkActive="active">Admin</a>
           </li>
         </ng-container>
       }
     </ul>
     @if((userService.currentUser$ | async); as user){
       <div class="dropdown" dropdown>
-        <a class="dropdown-toggle text-light text-decoration-none ms-2" dropdownToggle>Welcome {{user.userName | titlecase}}</a>
-        <ul class="dropdown-menu mt-3" *dropdownMenu>
-          <li><a class="dropdown-item" routerLink="member/edit">Edit Profile</a></li>
+        <a class="dropdown-toggle text-light text-decoration-none ms-2" dropdownToggle>
+          <i class="fa fa-comments me-lg-2"></i>
+          <span class="d-none d-lg-inline-flex">Comments</span>
+        </a>
+        <ul class="dropdown-menu mt-3 bg-dark" *dropdownMenu>
+          <li><a class="dropdown-item text-secondary" routerLink="member/edit">Comment</a></li>
           <div class="dropdown-divider"></div>
-          <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+        </ul>
+      </div>
+    }
+    @if((userService.currentUser$ | async); as user){
+      <div class="dropdown" dropdown>
+        <a class="dropdown-toggle text-light text-decoration-none ms-2" dropdownToggle>
+          <i class="fa fa-bell me-lg-2"></i>
+          <span class="d-none d-lg-inline-flex">Notifications</span>
+        </a>
+        <ul class="dropdown-menu mt-3 bg-dark" *dropdownMenu>
+          <li><a class="dropdown-item text-secondary" routerLink="member/edit">Notification</a></li>
+          <div class="dropdown-divider"></div>
+        </ul>
+      </div>
+    }
+    @if((userService.currentUser$ | async); as user){
+      <div class="dropdown" dropdown style="margin-left: 30px;">
+        <a class="dropdown-toggle text-light text-decoration-none ms-2" dropdownToggle>
+          <i class="fa fa-user me-lg-2"></i>
+          <span class="d-none d-lg-inline-flex">Welcome {{user.userName | titlecase}}</span>
+        </a>
+        <ul class="dropdown-menu mt-3 bg-dark" *dropdownMenu>
+          <li><a class="dropdown-item text-warning" routerLink="edit-user">Edit Profile</a></li>
+          <div class="dropdown-divider"></div>
+          <li><a class="dropdown-item text-danger" (click)="logout()">Logout</a></li>
         </ul>
       </div>
     }
     @if(!(userService.currentUser$ | async)){
       <form #loginForm="ngForm" class="d-flex" (submit)="login()">
-        <input name="username" [(ngModel)]="loginModel.userName" class="form-control me-2" type="text" placeholder="Username">
-        <input name="password" [(ngModel)]="loginModel.password" class="form-control me-2" type="password"
-          placeholder="Password">
-        <button class="btn btn-success" type="submit">Login</button>
+        <input name="userName" [(ngModel)]="loginModel.userName" class="form-control me-2" type="text" placeholder="Username">
+        <input name="password" [(ngModel)]="loginModel.password" class="form-control me-2" type="password" placeholder="Password">
+        <button class="btn btn-outline-light" type="submit">Login</button>
       </form>
     }
   </div>

@@ -17,6 +17,9 @@ export class UserService {
   constructor(private http:HttpClient) {}
 
   setCurrentUser(user:IUser){
+    user.roles = [];
+    const roles = this.getDecodedToken(user.token).role;
+    Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
     localStorage.setItem('user', JSON.stringify(user));
     this.currentUserSource.next(user);
   }
@@ -56,5 +59,9 @@ export class UserService {
 
   deleteUser(id:number){
     return this.http.delete<IResponse<string>>(environment.apiUrl + `User/DeleteUserById/${id}`);
+  }
+
+  getDecodedToken(token:string){
+    return JSON.parse(atob(token.split('.')[1]));
   }
 }
