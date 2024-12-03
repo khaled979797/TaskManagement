@@ -46,7 +46,7 @@ export class EditUserComponent {
       },
       error: (err:any) => {
         this.validationErrors = err;
-        this.toastr.error('Error while updating');
+        this.toastr.error('Failed to update user');
       }
     });
   }
