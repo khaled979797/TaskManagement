@@ -8,7 +8,7 @@
         </tr>
       </thead>
       <tbody>
-        @for(user of users; track user.userName){
+        @for(user of users; track user.id){
           <tr>
             <td>{{user.userName}}</td>
             <td><button (click)="deleteUser(user.id)" class="btn btn-outline-danger">Delete</button></td>

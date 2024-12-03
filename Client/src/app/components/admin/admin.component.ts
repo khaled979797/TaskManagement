@@ -30,7 +30,7 @@ export class AdminComponent{
   deleteUser(id:number){
     this.userService.deleteUser(id).subscribe({
       next: () => this.toastr.success('User is deleted'),
-      error: () => this.toastr.error('Error while deleting')
+      error: () => this.toastr.error('Failed to delete user')
     });
   }
 }
