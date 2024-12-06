@@ -9,7 +9,6 @@
         public string? Status { get; set; }
         public DateTime DueDate { get; set; }
         public string? UserName { get; set; }
-        public string? ProjectName { get; set; }
         public List<AssignmentComment>? AssignmentComments { get; set; }
         public List<AssignmentAttachment>? AssignmentAttachments { get; set; }
     }

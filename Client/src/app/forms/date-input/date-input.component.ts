@@ -11,6 +11,7 @@ import { BsDatepickerConfig, BsDatepickerModule } from 'ngx-bootstrap/datepicker
 })
 export class DateInputComponent implements ControlValueAccessor{
   @Input() label!:string;
+  @Input() maxDate!:Date;
   bsConfig: Partial<BsDatepickerConfig>;
 
   constructor(@Self() public ngControl:NgControl){
@@ -18,6 +19,7 @@ export class DateInputComponent implements ControlValueAccessor{
     this.bsConfig = {
       containerClass: 'theme-red',
       dateInputFormat: 'DD MMMM YYYY',
+
     }
   }
 

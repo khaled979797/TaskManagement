@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TaskManagement.Data.Enums;
 using TaskManagement.Data.Models;
 using TaskManagement.Service.Context;
 using TaskManagement.Service.Interfaces;
@@ -16,8 +17,6 @@ namespace TaskManagement.Service.Repositories
             {
                 var user = await context.Users.FirstOrDefaultAsync(x => x.Id == assignment.UserId);
                 if (user is null) return null!;
-                var project = await context.Projects!.FirstOrDefaultAsync(x => x.Id == assignment.ProjectId);
-                if (project is null) return null!;
 
                 var newAssignment = await AddAsync(assignment);
                 if (newAssignment is null) return null!;
@@ -57,8 +56,7 @@ namespace TaskManagement.Service.Repositories
             {
                 var user = await context.Users.FirstOrDefaultAsync(x => x.Id == assignment.UserId);
                 if (user is null) return "UserNotFound";
-                var project = await context.Projects!.FirstOrDefaultAsync(x => x.Id == assignment.ProjectId);
-                if (project is null) return "ProjectNotFound";
+
 
                 var checkAssignmentExist = await GetTableNoTracking().FirstOrDefaultAsync(x => x.Id == assignment.Id);
                 if (checkAssignmentExist is null) return "NotFound";
@@ -76,7 +74,7 @@ namespace TaskManagement.Service.Repositories
 
         public async Task<List<Assignment>> GetAllAssignments()
         {
-            var assignments = await GetTableNoTracking().Include(x => x.User).Include(x => x.Project)
+            var assignments = await GetTableNoTracking().Include(x => x.User)
                 .Include(x => x.Comments)!.ThenInclude(x => x.User)
                 .Include(x => x.Attachments)!.ThenInclude(x => x.User).ToListAsync();
 
@@ -85,7 +83,7 @@ namespace TaskManagement.Service.Repositories
 
         public async Task<Assignment> GetAssignmentById(int id)
         {
-            return await GetTableNoTracking().Include(x => x.User).Include(x => x.Project)
+            return await GetTableNoTracking().Include(x => x.User)
                 .Include(x => x.Comments)!.ThenInclude(x => x.User)
                 .Include(x => x.Attachments)!.ThenInclude(x => x.User)
                 .FirstOrDefaultAsync(x => x.Id == id) ?? null!;
@@ -99,6 +97,46 @@ namespace TaskManagement.Service.Repositories
         public async Task<bool> IsTitleExistExcludeSelf(string title, int id)
         {
             return await GetTableNoTracking().FirstOrDefaultAsync(x => x.Title == title && x.Id != id) != null;
+        }
+
+        public async Task<Assignment> MarkAssignmentCompleted(int id)
+        {
+            await BeginTransactionAsync();
+            try
+            {
+                var assignment = await GetTableNoTracking().FirstAsync(x => x.Id == id);
+                if (assignment is null) return null!;
+
+                assignment.Status = Status.Completed;
+                await UpdateAsync(assignment);
+                await CommitAsync();
+                return assignment;
+            }
+            catch
+            {
+                await RollBackAsync();
+                return null!;
+            }
+        }
+
+        public async Task<Assignment> MarkAssignmentUncompleted(int id)
+        {
+            await BeginTransactionAsync();
+            try
+            {
+                var assignment = await GetTableNoTracking().FirstAsync(x => x.Id == id);
+                if (assignment is null) return null!;
+
+                assignment.Status = Status.Running;
+                await UpdateAsync(assignment);
+                await CommitAsync();
+                return assignment;
+            }
+            catch
+            {
+                await RollBackAsync();
+                return null!;
+            }
         }
     }
 }

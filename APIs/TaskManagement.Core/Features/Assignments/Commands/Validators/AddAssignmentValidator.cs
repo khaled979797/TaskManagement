@@ -33,22 +33,21 @@ namespace TaskManagement.Core.Features.Assignments.Commands.Validators
                 .NotEmpty().WithMessage("Status should not be empty")
                 .NotNull().WithMessage("Status should not be null");
 
+            RuleFor(x => x.DueDate)
+                .NotEmpty().WithMessage("DueDate should not be empty")
+                .NotNull().WithMessage("DueDate should not be null");
+
             RuleFor(x => x.UserId)
                 .GreaterThan(0).WithMessage("UserId should be greater than zero")
                 .NotEmpty().WithMessage("UserId should not be empty")
                 .NotNull().WithMessage("UserId should not be null");
-
-            RuleFor(x => x.ProjectId)
-                .GreaterThan(0).WithMessage("ProjectId should be greater than zero")
-                .NotEmpty().WithMessage("ProjectId should not be empty")
-                .NotNull().WithMessage("ProjectId should not be null");
         }
 
         public void ApplyCustomValidationsRules()
         {
             RuleFor(x => x.Title)
                 .MustAsync(async (Key, CancellationToken) => !await assignmentRepository.IsTitleExist(Key!))
-                .WithMessage("Name is already exist");
+                .WithMessage("Title is already exist");
         }
     }
 }

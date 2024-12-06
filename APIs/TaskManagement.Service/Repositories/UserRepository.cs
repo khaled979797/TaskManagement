@@ -37,7 +37,14 @@ namespace TaskManagement.Service.Repositories
 
                 if (!result.Succeeded) return null!;
                 await CommitAsync();
-                return new RegisterUserResponse { Id = user.Id, UserName = user.UserName, Token = token };
+                return new RegisterUserResponse
+                {
+                    Id = user.Id,
+                    UserName = user.UserName,
+                    Name = user.Name,
+                    Email = user.Email,
+                    Token = token
+                };
             }
             catch
             {
@@ -55,7 +62,14 @@ namespace TaskManagement.Service.Repositories
             if (!result.Succeeded) return null!;
 
             var token = await tokenRepository.CreateToken(user);
-            return new LoginUserResponse { Id = user.Id, UserName = user.UserName, Token = token };
+            return new LoginUserResponse
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                Name = user.Name,
+                Email = user.Email,
+                Token = token
+            };
         }
 
         public async Task<string> EditUser(User user)

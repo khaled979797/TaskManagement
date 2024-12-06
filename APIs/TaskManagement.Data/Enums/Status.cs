@@ -2,6 +2,6 @@
 {
     public enum Status
     {
-        Created = 1, Running, Completed
+        Running = 1, Completed
     }
 }

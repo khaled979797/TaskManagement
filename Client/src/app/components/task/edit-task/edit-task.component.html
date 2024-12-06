@@ -1,0 +1,50 @@
+<section class="vh-100 gradient-custom-2">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-12 col-xl-10">
+        <div class="card mask-custom mt-4 mb-3">
+          <div class="card-body p-4 text-white">
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-6">
+                  <form [formGroup]="taskForm" (submit)="taskForm.valid && editTask()">
+                    <h2 class="text-uppercase text-center text-light mb-4" style="margin-top: 100px;">Edit Task</h2>
+                    <app-text-input [formControl]="title" [label]='"Title"'></app-text-input>
+                    <app-text-input [formControl]="description" [label]='"Description"'></app-text-input>
+                    <div>
+                      <label for="priority" class="text-light">Priority</label>
+                      <select [formControl]="priority" class="form-control form-control-lg mb-3" id="priority">
+                        @for (p of priorities; track p) {
+                          <option [ngValue]="p.value">{{p.key}}</option>
+                        }
+                      </select>
+                    </div>
+                    <div>
+                      <label for="status" class="text-light">Status</label>
+                      <select [formControl]="status" class="form-control form-control-lg mb-4" id="status">
+                        @for (s of statuses; track s) {
+                          <option [ngValue]="s.value">{{s.key}}</option>
+                        }
+                      </select>
+                    </div>
+                    <app-date-input [formControl]="dueDate" [label]='"Due Date"'></app-date-input>
+                    @if(validationErrors.length > 0){
+                      <div class="row">
+                        <ul class="text-danger">
+                          @for(error of validationErrors; track error) {<li>{{error}}</li>}
+                        </ul>
+                      </div>
+                    }
+                    <div class="d-flex justify-content-center mt-5">
+                      <button [disabled]="!taskForm.valid" class="btn btn-outline-info btn-lg" style="margin-right: 7px;" type="submit">Add</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

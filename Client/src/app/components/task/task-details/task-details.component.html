@@ -1,0 +1,68 @@
+<div class="d-flex justify-content-center align-items-center vh-100 mt-3">
+  <div class="card shadow-lg"
+       style="background: rgba(255, 255, 255, 0.1);
+              backdrop-filter: blur(10px);
+              border-radius: 15px;
+              width: 80%;
+              max-width: 800px;
+              color: #fff;">
+    <div class="card-header text-center text-white rounded-top"
+         style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
+      <h5 class="mb-0">{{ task.title }}</h5>
+      <small>Assigned by: {{ task.userName }}</small>
+    </div>
+    <div class="card-body bg-dark">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <p><strong>Description:</strong> {{ task.description }}</p>
+          <p>
+            <strong>Priority: </strong>
+            <span [ngClass]="{
+              'badge bg-danger': task.priority === 'High',
+              'badge bg-warning': task.priority === 'Medium',
+              'badge bg-success': task.priority === 'Low'
+            }"> {{ task.priority }}</span>
+          </p>
+          <p>
+            <strong>Status: </strong>
+            <span [ngClass]="{
+              'badge bg-success': task.status === 'Running',
+              'badge bg-secondary': task.status === 'Completed'
+            }"> {{ task.status }}</span>
+          </p>
+          <p><strong>Due Date:</strong> {{ task.dueDate | date:'mediumDate' }}</p>
+        </div>
+      </div>
+      <div class="mb-4">
+        <h6 class="text-light">Comments</h6>
+        <div *ngIf="task.assignmentComments.length > 0; else noComments">
+          <div *ngFor="let comment of task.assignmentComments"
+               class="p-2 rounded mb-2"
+               style="background: rgba(255, 255, 255, 0.2);">
+            <p class="mb-0 text-warning"><strong>{{ comment.commentedByUser }}</strong></p>
+            <p class="mb-1">{{ comment.content }}</p>
+            <small class="text-dark">{{ comment.timeStamp | date:'short' }}</small>
+          </div>
+        </div>
+        <ng-template #noComments>
+          <p class="text-light">No comments yet.</p>
+        </ng-template>
+      </div>
+      <div>
+        <h6 class="text-light">Attachments</h6>
+        <div *ngIf="task.assignmentAttachments.length > 0; else noAttachments">
+          <ul class="list-group list-group-flush" style="background: rgba(255, 255, 255, 0.2);">
+            <li *ngFor="let attachment of task.assignmentAttachments"
+                class="list-group-item bg-transparent text-light d-flex justify-content-between align-items-center">
+              <a [href]="attachment.filePath" target="_blank">{{ attachment.filePath }}</a>
+              <small class="text-dark">{{ attachment.timeStamp | date:'short' }} by {{ attachment.addedByUser }}</small>
+            </li>
+          </ul>
+        </div>
+        <ng-template #noAttachments>
+          <p class="text-light">No attachments available.</p>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

@@ -11,7 +11,6 @@ namespace TaskManagement.Core.Mapper.AssignmentMapping
                 .ForMember(dst => dst.Priority, opt => opt.MapFrom(src => src.Priority.ToString()))
                 .ForMember(dst => dst.Status, opt => opt.MapFrom(src => src.Status.ToString()))
                 .ForPath(dst => dst.UserName, opt => opt.MapFrom(src => src.User!.UserName))
-                .ForPath(dst => dst.ProjectName, opt => opt.MapFrom(src => src.Project!.Name))
                 .ForPath(dst => dst.AssignmentComments, opt => opt.MapFrom(src => src.Comments))
                 .ForPath(dst => dst.AssignmentAttachments, opt => opt.MapFrom(src => src.Attachments));
 
