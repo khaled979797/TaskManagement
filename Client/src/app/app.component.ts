@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { NavComponent } from "./components/nav/nav.component";
+import { NavComponent } from "./components/shared/nav/nav.component";
 import { IUser } from './models/userModels/iuser';
 import { UserService } from './services/user.service';
 

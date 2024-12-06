@@ -1,0 +1,38 @@
+<section class="vh-100 gradient-custom-2" *appHasRole="['Admin']">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-12 col-xl-10">
+        <div class="card mask-custom mt-4 mb-3">
+          <div class="card-body p-4 text-white">
+            <div class="rounded border overflow-hidden">
+              <table class="table table-dark mb-0">
+                <thead>
+                  <tr>
+                    <th>Username</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (user of users; track user.id){
+                  <tr class="fw-normal">
+                    <td class="align-middle">{{user.userName}}</td>
+                    <td class="align-middle">{{user.name}}</td>
+                    <td class="align-middle">{{user.email}}</td>
+                    <td class="border-0 align-middle d-flex justify-content-end">
+                      <button class="btn btn-outline-danger" title="Delete" (click)="deleteUser(user.id)">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

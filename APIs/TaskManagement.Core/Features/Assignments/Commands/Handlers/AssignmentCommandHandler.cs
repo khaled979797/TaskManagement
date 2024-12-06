@@ -10,7 +10,9 @@ namespace TaskManagement.Core.Features.Assignments.Commands.Handlers
     public class AssignmentCommandHandler : ResponseHandler,
         IRequestHandler<AddAssignmentCommand, NewResponse<string>>,
         IRequestHandler<EditAssignmentCommand, NewResponse<string>>,
-        IRequestHandler<DeleteAssignmentCommand, NewResponse<string>>
+        IRequestHandler<DeleteAssignmentCommand, NewResponse<string>>,
+        IRequestHandler<CompleteAssignmentCommand, NewResponse<Assignment>>,
+        IRequestHandler<UncompleteAssignmentCommand, NewResponse<Assignment>>
     {
         private readonly IAssignmentRepository assignmentRepository;
         private readonly IMapper mapper;
@@ -52,6 +54,18 @@ namespace TaskManagement.Core.Features.Assignments.Commands.Handlers
                 case "Failed": return BadRequest<string>();
                 default: return Deleted<string>();
             }
+        }
+
+        public async Task<NewResponse<Assignment>> Handle(CompleteAssignmentCommand request, CancellationToken cancellationToken)
+        {
+            var assignment = await assignmentRepository.MarkAssignmentCompleted(request.Id);
+            return assignment == null ? BadRequest<Assignment>() : Success(assignment);
+        }
+
+        public async Task<NewResponse<Assignment>> Handle(UncompleteAssignmentCommand request, CancellationToken cancellationToken)
+        {
+            var assignment = await assignmentRepository.MarkAssignmentUncompleted(request.Id);
+            return assignment == null ? BadRequest<Assignment>() : Success(assignment);
         }
     }
 }

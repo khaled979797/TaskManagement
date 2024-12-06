@@ -1,0 +1,35 @@
+<section class="vh-100 gradient-custom-2">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-12 col-xl-10">
+        <div class="card mask-custom mt-4 mb-3">
+          <div class="card-body p-4 text-white">
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-6">
+                  <form [formGroup]="projectForm" (submit)="projectForm.valid && addProject()">
+                    <h2 class="text-uppercase text-center text-light mb-4" style="margin-top: 100px;">Create Project</h2>
+                    <app-text-input [formControl]="name" [label]='"Name"'></app-text-input>
+                    <app-text-input [formControl]="description" [label]='"Description"'></app-text-input>
+                    <app-date-input [formControl]="startDate" [label]='"Start Date"' [maxDate]="maxDate"></app-date-input>
+                    <app-date-input [formControl]="endDate" [label]='"End Date"'></app-date-input>
+                    @if(validationErrors.length > 0){
+                      <div class="row">
+                        <ul class="text-danger">
+                          @for(error of validationErrors; track error) {<li>{{error}}</li>}
+                        </ul>
+                      </div>
+                    }
+                    <div class="d-flex justify-content-center mt-5">
+                      <button [disabled]="!projectForm.valid" class="btn btn-outline-info btn-lg" style="margin-right: 7px;" type="submit">Add</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

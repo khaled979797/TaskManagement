@@ -9,6 +9,8 @@ namespace TaskManagement.Service.Interfaces
         Task<Assignment> GetAssignmentById(int id);
         Task<string> EditAssignment(Assignment assignment);
         Task<string> DeleteAssignmentById(int id);
+        Task<Assignment> MarkAssignmentCompleted(int id);
+        Task<Assignment> MarkAssignmentUncompleted(int id);
         Task<bool> IsTitleExist(string title);
         Task<bool> IsTitleExistExcludeSelf(string title, int id);
     }

@@ -37,7 +37,10 @@
             public const string GetAssignmentById = Prefix + "/GetAssignmentById" + SingleRoute;
             public const string EditAssignment = Prefix + "/EditAssignment";
             public const string DeleteAssignmentById = Prefix + "/DeleteAssignmentById" + SingleRoute;
+            public const string MarkAssignmentCompleted = Prefix + "/MarkAssignmentCompleted" + SingleRoute;
+            public const string MarkAssignmentUncompleted = Prefix + "/MarkAssignmentUncompleted" + SingleRoute;
         }
+
 
         public static class CommentRouting
         {

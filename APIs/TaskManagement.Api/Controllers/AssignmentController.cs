@@ -3,6 +3,7 @@ using TaskManagement.Core.Features.Assignments.Commands.Models;
 using TaskManagement.Core.Features.Assignments.Queries.Models;
 using TaskManagement.Core.Helpers;
 using TaskManagement.Data.Helpers.Meta;
+using TaskManagement.Data.Models;
 using TaskManagement.Data.Responses.Assignments.Queries;
 
 namespace TaskManagement.Api.Controllers
@@ -36,6 +37,24 @@ namespace TaskManagement.Api.Controllers
         public async Task<IActionResult> DeleteAssignmentById(int id)
         {
             var response = await Mediator.Send(new DeleteAssignmentCommand(id));
+            return NewResult(response);
+        }
+
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(NewResponse<Assignment>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(NewResponse<Assignment>))]
+        [HttpPatch(Router.AssignmentRouting.MarkAssignmentCompleted)]
+        public async Task<IActionResult> MarkAssignmentCompleted(int id)
+        {
+            var response = await Mediator.Send(new CompleteAssignmentCommand(id));
+            return NewResult(response);
+        }
+
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(NewResponse<Assignment>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(NewResponse<Assignment>))]
+        [HttpPatch(Router.AssignmentRouting.MarkAssignmentUncompleted)]
+        public async Task<IActionResult> MarkAssignmentUncompleted(int id)
+        {
+            var response = await Mediator.Send(new UncompleteAssignmentCommand(id));
             return NewResult(response);
         }
 
