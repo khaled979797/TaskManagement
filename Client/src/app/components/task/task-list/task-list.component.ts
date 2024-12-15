@@ -6,6 +6,9 @@ import { ToastrService } from 'ngx-toastr';
 import { RouterLink } from '@angular/router';
 import { Priority } from '../../../models/enums/priority';
 import { Status } from '../../../models/enums/status';
+import { UserService } from '../../../services/user.service';
+import { IUser } from '../../../models/userModels/iuser';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-task-list',
@@ -16,14 +19,18 @@ import { Status } from '../../../models/enums/status';
 })
 export class TaskListComponent implements OnInit{
   tasks:ITask[] = {} as ITask[];
-  constructor(private taskService:TaskService, private toastr:ToastrService){}
+  user:IUser = {} as IUser;
+  constructor(private taskService:TaskService, private toastr:ToastrService, private userService:UserService){}
 
   ngOnInit(): void {
     this.getTasks();
   }
 
   getTasks(){
-    this.taskService.getTasks().subscribe(response => this.tasks = response.data);
+    this.userService.currentUser$.pipe(take(1)).subscribe(user =>{
+      this.user = <IUser>user;
+      this.taskService.getTasksByUser(this.user.id).subscribe(response => this.tasks = response.data);
+    })
   }
 
   deleteTask(id:number){

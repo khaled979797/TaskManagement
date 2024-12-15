@@ -8,7 +8,7 @@ namespace TaskManagement.Service.Interfaces
     {
         Task<ImageUploadResult> AddAttachment(IFormFile file);
         Task<DeletionResult> DeleteAttachmentById(int id);
-        Task<List<Attachment>> GetAllAttachments();
+        Task<List<Attachment>> GetAllAttachments(int assignmentId);
         Task<Attachment> GetAttachmentById(int id);
     }
 }

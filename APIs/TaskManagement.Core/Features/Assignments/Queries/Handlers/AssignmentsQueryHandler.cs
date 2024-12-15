@@ -9,6 +9,7 @@ namespace TaskManagement.Core.Features.Assignments.Queries.Handlers
 {
     public class AssignmentsQueryHandler : ResponseHandler,
         IRequestHandler<GetAssignmentsQuery, NewResponse<List<GetAssignmentsResponse>>>,
+        IRequestHandler<GetAssignmentsByUserQuery, NewResponse<List<GetAssignmentsResponse>>>,
         IRequestHandler<GetAssignmentByIdQuery, NewResponse<GetAssignmentByIdResponse>>
     {
         private readonly IAssignmentRepository assignmentRepository;
@@ -33,6 +34,14 @@ namespace TaskManagement.Core.Features.Assignments.Queries.Handlers
             if (assignment is null) return NotFound<GetAssignmentByIdResponse>();
             var assignmentMapper = mapper.Map<GetAssignmentByIdResponse>(assignment);
             return Success(assignmentMapper);
+        }
+
+        public async Task<NewResponse<List<GetAssignmentsResponse>>> Handle(GetAssignmentsByUserQuery request, CancellationToken cancellationToken)
+        {
+            var assignments = await assignmentRepository.GetAllAssignmentsByUser(request.Id);
+            if (assignments is null) return NotFound<List<GetAssignmentsResponse>>();
+            var assignmentsMapper = mapper.Map<List<GetAssignmentsResponse>>(assignments);
+            return Success(assignmentsMapper);
         }
     }
 }

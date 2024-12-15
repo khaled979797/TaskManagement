@@ -63,9 +63,10 @@ namespace TaskManagement.Service.Repositories
             }
         }
 
-        public async Task<List<Attachment>> GetAllAttachments()
+        public async Task<List<Attachment>> GetAllAttachments(int assignmentId)
         {
-            var attachments = await GetTableNoTracking().Include(x => x.User).ToListAsync();
+            var attachments = await GetTableNoTracking()
+                .Where(x => x.AssignmentId == assignmentId).Include(x => x.User).ToListAsync();
             return attachments.Count() > 0 ? attachments : null!;
         }
 

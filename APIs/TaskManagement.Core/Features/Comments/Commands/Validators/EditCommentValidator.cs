@@ -21,10 +21,6 @@ namespace TaskManagement.Core.Features.Comments.Commands.Validators
                 .NotEmpty().WithMessage("Content should not be empty")
                 .NotNull().WithMessage("Content should not be null");
 
-            RuleFor(x => x.TimeStamp)
-                .NotEmpty().WithMessage("TimeStamp should not be empty")
-                .NotNull().WithMessage("TimeStamp should not be null");
-
             RuleFor(x => x.UserId)
                 .GreaterThan(0)
                 .NotEmpty().WithMessage("UserId should not be empty")

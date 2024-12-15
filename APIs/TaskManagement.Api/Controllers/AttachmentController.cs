@@ -33,9 +33,9 @@ namespace TaskManagement.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(NewResponse<List<GetAttachmentsResponse>>))]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(NewResponse<List<GetAttachmentsResponse>>))]
         [HttpGet(Router.AttachmentRouting.GetAllAttachments)]
-        public async Task<IActionResult> GetAllAttachments()
+        public async Task<IActionResult> GetAllAttachments(int assignmentId)
         {
-            var response = await Mediator.Send(new GetAttachmentsQuery());
+            var response = await Mediator.Send(new GetAttachmentsQuery(assignmentId));
             return NewResult(response);
         }
 

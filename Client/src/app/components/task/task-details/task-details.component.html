@@ -1,11 +1,13 @@
-<div class="d-flex justify-content-center align-items-center vh-100 mt-3">
+<div class="d-flex justify-content-center align-items-center vh-100 mt-5 mb-5">
   <div class="card shadow-lg"
        style="background: rgba(255, 255, 255, 0.1);
               backdrop-filter: blur(10px);
               border-radius: 15px;
               width: 80%;
               max-width: 800px;
-              color: #fff;">
+              color: #fff;
+               max-height: 90vh;
+               overflow-y: auto;">
     <div class="card-header text-center text-white rounded-top"
          style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
       <h5 class="mb-0">{{ task.title }}</h5>
@@ -39,9 +41,11 @@
           <div *ngFor="let comment of task.assignmentComments"
                class="p-2 rounded mb-2"
                style="background: rgba(255, 255, 255, 0.2);">
-            <p class="mb-0 text-warning"><strong>{{ comment.commentedByUser }}</strong></p>
             <p class="mb-1">{{ comment.content }}</p>
-            <small class="text-dark">{{ comment.timeStamp | date:'short' }}</small>
+            <div class="d-flex">
+              <small class="text-warning" style="margin-right: 5px;"><strong>{{ comment.commentedByUser }}</strong></small>
+              <small class="text-dark">{{ comment.timeStamp | date:'short' }}</small>
+            </div>
           </div>
         </div>
         <ng-template #noComments>

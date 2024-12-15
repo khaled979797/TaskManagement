@@ -21,7 +21,7 @@ namespace TaskManagement.Core.Features.Attachments.Queries.Handlers
         }
         public async Task<NewResponse<List<GetAttachmentsResponse>>> Handle(GetAttachmentsQuery request, CancellationToken cancellationToken)
         {
-            var attachments = await attachmentRepository.GetAllAttachments();
+            var attachments = await attachmentRepository.GetAllAttachments(request.AssignmentId);
             if (attachments is null) return NotFound<List<GetAttachmentsResponse>>();
             var attachmentsMapper = mapper.Map<List<GetAttachmentsResponse>>(attachments);
             return Success(attachmentsMapper);

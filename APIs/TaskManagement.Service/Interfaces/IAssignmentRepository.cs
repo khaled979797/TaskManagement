@@ -6,6 +6,7 @@ namespace TaskManagement.Service.Interfaces
     {
         Task<Assignment> AddAssignment(Assignment assignment);
         Task<List<Assignment>> GetAllAssignments();
+        Task<List<Assignment>> GetAllAssignmentsByUser(int id);
         Task<Assignment> GetAssignmentById(int id);
         Task<string> EditAssignment(Assignment assignment);
         Task<string> DeleteAssignmentById(int id);
