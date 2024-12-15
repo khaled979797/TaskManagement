@@ -11,6 +11,8 @@ import { ProjectListComponent } from './components/project/project-list/project-
 import { EditTaskComponent } from './components/task/edit-task/edit-task.component';
 import { AddTaskComponent } from './components/task/add-task/add-task.component';
 import { TaskDetailsComponent } from './components/task/task-details/task-details.component';
+import { CommentsComponent } from './components/shared/comments/comments.component';
+import { AttachmentsComponent } from './components/shared/attachments/attachments.component';
 
 export const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -25,4 +27,6 @@ export const routes: Routes = [
   {path: 'edit-task/:id', component: EditTaskComponent},
   {path: 'add-task', component: AddTaskComponent},
   {path: 'task-details/:id', component: TaskDetailsComponent},
+  {path: 'comments/:id', component: CommentsComponent},
+  {path: 'attachments/:id', component: AttachmentsComponent}
 ];

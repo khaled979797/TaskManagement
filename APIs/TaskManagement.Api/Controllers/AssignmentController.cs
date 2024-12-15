@@ -70,6 +70,15 @@ namespace TaskManagement.Api.Controllers
             return NewResult(response);
         }
 
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(NewResponse<List<GetAssignmentsResponse>>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(NewResponse<List<GetAssignmentsResponse>>))]
+        [HttpGet(Router.AssignmentRouting.GetAllAssignmentsbyUser)]
+        public async Task<IActionResult> GetAllAssignmentsbyUser(int id)
+        {
+            var response = await Mediator.Send(new GetAssignmentsByUserQuery(id));
+            return NewResult(response);
+        }
+
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(NewResponse<GetAssignmentByIdResponse>))]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(NewResponse<GetAssignmentByIdResponse>))]
         [HttpGet(Router.AssignmentRouting.GetAssignmentById)]

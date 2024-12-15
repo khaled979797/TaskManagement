@@ -25,6 +25,10 @@ export class TaskService {
     return this.http.get<IResponse<ITask[]>>(environment.apiUrl + 'Assignment/GetAllAssignments')
   }
 
+  getTasksByUser(id:number){
+    return this.http.get<IResponse<ITask[]>>(environment.apiUrl + `Assignment/GetAllAssignmentsByUser/${id}`)
+  }
+
   getTask(id:number){
     return this.http.get<IResponse<ITask>>(environment.apiUrl + `Assignment/GetAssignmentById/${id}`)
   }

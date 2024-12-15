@@ -34,6 +34,7 @@
             public const string Prefix = Rule + "Assignment";
             public const string AddAssignment = Prefix + "/AddAssignment";
             public const string GetAllAssignments = Prefix + "/GetAllAssignments";
+            public const string GetAllAssignmentsbyUser = Prefix + "/GetAllAssignmentsbyUser" + SingleRoute;
             public const string GetAssignmentById = Prefix + "/GetAssignmentById" + SingleRoute;
             public const string EditAssignment = Prefix + "/EditAssignment";
             public const string DeleteAssignmentById = Prefix + "/DeleteAssignmentById" + SingleRoute;
@@ -56,7 +57,7 @@
         {
             public const string Prefix = Rule + "Attachment";
             public const string AddAttachment = Prefix + "/AddAttachment";
-            public const string GetAllAttachments = Prefix + "/GetAllAttachments";
+            public const string GetAllAttachments = Prefix + "/GetAllAttachments" + "/{assignmentId}";
             public const string GetAttachmentById = Prefix + "/GetAttachmentById" + SingleRoute;
             public const string DeleteAttachmentById = Prefix + "/DeleteAttachmentById" + SingleRoute;
         }

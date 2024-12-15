@@ -81,6 +81,15 @@ namespace TaskManagement.Service.Repositories
             return assignments.Count() > 0 ? assignments : null!;
         }
 
+        public async Task<List<Assignment>> GetAllAssignmentsByUser(int id)
+        {
+            var assignments = await GetTableNoTracking().Where(x => x.User!.Id == id).Include(x => x.User)
+                .Include(x => x.Comments)!.ThenInclude(x => x.User)
+                .Include(x => x.Attachments)!.ThenInclude(x => x.User).ToListAsync();
+
+            return assignments.Count() > 0 ? assignments : null!;
+        }
+
         public async Task<Assignment> GetAssignmentById(int id)
         {
             return await GetTableNoTracking().Include(x => x.User)
