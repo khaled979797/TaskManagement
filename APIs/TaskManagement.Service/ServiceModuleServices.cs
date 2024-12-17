@@ -108,10 +108,6 @@ namespace TaskManagement.Service
             services.AddSingleton(cloudinarySettings);
             #endregion
 
-            #region SignalR
-            services.AddSignalR();
-            #endregion
-
             #region HangFire
             services.AddHangfire(x => x.UseSqlServerStorage(configuration.GetConnectionString("DbContext")));
             services.AddHangfireServer();

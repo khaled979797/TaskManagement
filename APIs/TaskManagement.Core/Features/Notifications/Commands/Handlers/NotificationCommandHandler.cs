@@ -1,12 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
-using Microsoft.AspNetCore.SignalR;
 using TaskManagement.Core.Features.Notifications.Commands.Models;
 using TaskManagement.Core.Helpers;
 using TaskManagement.Data.Models;
 using TaskManagement.Data.Responses.Notifications.Commands;
 using TaskManagement.Service.Interfaces;
-using TaskManagement.Service.SignalR;
 
 namespace TaskManagement.Core.Features.Notifications.Commands.Handlers
 {
@@ -21,14 +19,11 @@ namespace TaskManagement.Core.Features.Notifications.Commands.Handlers
     {
         private readonly INotificationRepository notificationRepository;
         private readonly IMapper mapper;
-        private readonly IHubContext<NotificationHub> hubContext;
 
-        public NotificationCommandHandler(INotificationRepository notificationRepository, IMapper mapper,
-            IHubContext<NotificationHub> hubContext)
+        public NotificationCommandHandler(INotificationRepository notificationRepository, IMapper mapper)
         {
             this.notificationRepository = notificationRepository;
             this.mapper = mapper;
-            this.hubContext = hubContext;
         }
         public async Task<NewResponse<string>> Handle(AddNotificationCommand request, CancellationToken cancellationToken)
         {
@@ -36,8 +31,6 @@ namespace TaskManagement.Core.Features.Notifications.Commands.Handlers
             var notification = await notificationRepository.AddNotification(notificationMapper);
 
             if (notification is null) return BadRequest<string>();
-
-            await hubContext.Clients.User(notification.UserId.ToString()).SendAsync("ReceiveNotification", notification);
             return Success("");
         }
 

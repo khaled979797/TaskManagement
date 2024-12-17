@@ -35,8 +35,33 @@
           <span class="d-none d-lg-inline-flex">Notifications</span>
         </a>
         <ul class="dropdown-menu mt-3 bg-dark" *dropdownMenu>
-          <li><a class="dropdown-item text-secondary" routerLink="member/edit">Notification</a></li>
-          <div class="dropdown-divider"></div>
+          @if(!notifications || notifications.length == 0){
+            <a class="dropdown-item text-light hover-dark">No notifications yet..</a>
+          }
+          @if(notifications && notifications.length > 0){
+            <div class="d-flex justify-content-around">
+              <button class="btn btn-lg btn-outline-danger fa fa-trash" title="Delete All" (click)="deleteAllNotifications()">
+              </button>
+              <button class="btn btn-lg btn-outline-success fa fa-check" title="Read All" (click)="readAllNotifications()">
+              </button>
+              <button class="btn btn-lg btn-outline-danger fa fa-close" title="Unread All" (click)="unreadAllNotifications()">
+              </button>
+            </div>
+            <div class="dropdown-divider bg-light"></div>
+            @for(notify of notifications; track notify.id){
+              <li [ngClass]="{'bg-secondary': !notify.isRead}">
+                <a class="dropdown-item text-light hover-dark">
+                  {{notify.message}}
+                  <button class="btn btn-sm btn-outline-danger fa fa-trash" (click)="deleteNotification(notify.id)" title="Delete">
+                  </button>
+                  <button class="btn btn-sm btn-outline-success fa fa-check" style="margin-left: 5px;" (click)="readNotification(notify.id)" title="Read">
+                  </button>
+                  <button class="btn btn-sm btn-outline-danger fa fa-close" style="margin-left: 5px;" (click)="unreadNotification(notify.id)" title="Unread">
+                  </button>
+                </a>
+              </li>
+            }
+          }
         </ul>
       </div>
     }
@@ -62,3 +87,4 @@
     }
   </div>
 </nav>
+

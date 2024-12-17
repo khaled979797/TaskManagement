@@ -21,9 +21,26 @@
                     <td class="align-middle">{{user.name}}</td>
                     <td class="align-middle">{{user.email}}</td>
                     <td class="border-0 align-middle d-flex justify-content-end">
-                      <button class="btn btn-outline-danger" title="Delete" (click)="deleteUser(user.id)">
-                        <i class="fa fa-trash"></i>
+                      <button class="btn btn-outline-danger fa fa-trash" title="Delete" (click)="deleteUser(user.id)" style="margin-right: 10px;">
                       </button>
+                      <button type="button" class="btn btn-outline-success fa fa-bell" title="Notify" (click)="openModal(template)"></button>
+                      <ng-template #template>
+                        <div class="modal-header">
+                          <h4 class="modal-title pull-left">Send Notification</h4>
+                          <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+                            <span aria-hidden="true" class="visually-hidden">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <form [formGroup]="notifyForm" (submit)="notifyForm.valid && notifyUser(user.id)">
+                            <input [formControl]="message" class="form-control mb-2" type="text">
+                            <div class="d-flex justify-content-end">
+                              <button class="btn btn-outline-success" title="Notify" type="submit">Send
+                              </button>
+                            </div>
+                          </form>
+                        </div>
+                      </ng-template>
                     </td>
                   </tr>
                   }
