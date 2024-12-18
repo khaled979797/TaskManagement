@@ -5,7 +5,7 @@ namespace TaskManagement.Service.Interfaces
     public interface IScheduleRepository : IGenericRepository<Schedule>
     {
         Task<Schedule> AddSchedule(Schedule schedule);
-        Task<Schedule> EditSchedule(int id, DateTime notifyDate);
+        Task<Schedule> EditSchedule(Schedule schedule);
         Task<string> DeleteScheduleById(int id);
         Task<List<Schedule>> GetAllSchedules();
         Task<List<Schedule>> GetAllSchedulesForUser(int userId);

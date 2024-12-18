@@ -31,7 +31,8 @@ namespace TaskManagement.Core.Features.Schedules.Commands.Handlers
 
         public async Task<NewResponse<string>> Handle(EditScheduleCommand request, CancellationToken cancellationToken)
         {
-            var schedule = await scheduleRepository.EditSchedule(request.Id, request.NotifyDate);
+            var scheduleMapper = mapper.Map<Schedule>(request);
+            var schedule = await scheduleRepository.EditSchedule(scheduleMapper);
             if (schedule is null) return BadRequest<string>();
             return Success("");
         }
