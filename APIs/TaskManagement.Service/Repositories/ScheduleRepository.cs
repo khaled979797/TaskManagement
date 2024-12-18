@@ -35,21 +35,22 @@ namespace TaskManagement.Service.Repositories
         }
 
 
-        public async Task<Schedule> EditSchedule(int id, DateTime notifyDate)
+        public async Task<Schedule> EditSchedule(Schedule schedule)
         {
             await BeginTransactionAsync();
             try
             {
-                var schedule = await GetTableNoTracking().FirstOrDefaultAsync(x => x.Id == id);
-                if (schedule is null) return null!;
+                var scheduleInDb = await GetTableNoTracking().FirstOrDefaultAsync(x => x.Id == schedule.Id);
+                if (scheduleInDb is null) return null!;
 
-                var delay = notifyDate - DateTime.UtcNow;
-                BackgroundJob.Reschedule(schedule.JobId.ToString(), TimeSpan.FromSeconds(delay.TotalSeconds));
+                var delay = schedule.NotifyDate - DateTime.UtcNow;
+                BackgroundJob.Reschedule(scheduleInDb.JobId.ToString(), TimeSpan.FromSeconds(delay.TotalSeconds));
 
-                schedule.NotifyDate = notifyDate;
-                await UpdateAsync(schedule);
+                scheduleInDb.NotifyDate = schedule.NotifyDate;
+                scheduleInDb.Message = schedule.Message;
+                await UpdateAsync(scheduleInDb);
                 await CommitAsync();
-                return schedule;
+                return scheduleInDb;
             }
             catch
             {

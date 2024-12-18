@@ -17,7 +17,6 @@ import { DateInputComponent } from '../../../forms/date-input/date-input.compone
 })
 export class AddProjectComponent implements OnInit{
   maxDate:Date = new Date();
-  user:IProject = {} as IProject;
   validationErrors:any = [];
   projectForm:FormGroup = new FormGroup({});
   constructor(private projectService:ProjectService, private fb:FormBuilder, private router:Router, private toastr:ToastrService){}

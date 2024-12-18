@@ -8,6 +8,7 @@ namespace TaskManagement.Core.Mapper.ScheduleMapping
         {
             #region Commands
             AddScheduleMapping();
+            EditScheduleMapping();
             #endregion
 
             #region Queries

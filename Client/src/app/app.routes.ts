@@ -13,6 +13,9 @@ import { AddTaskComponent } from './components/task/add-task/add-task.component'
 import { TaskDetailsComponent } from './components/task/task-details/task-details.component';
 import { CommentsComponent } from './components/shared/comments/comments.component';
 import { AttachmentsComponent } from './components/shared/attachments/attachments.component';
+import { ScheduleListComponent } from './components/schedule/schedule-list/schedule-list.component';
+import { EditScheduleComponent } from './components/schedule/edit-schedule/edit-schedule.component';
+import { AddScheduleComponent } from './components/schedule/add-schedule/add-schedule.component';
 
 export const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -28,5 +31,8 @@ export const routes: Routes = [
   {path: 'add-task', component: AddTaskComponent},
   {path: 'task-details/:id', component: TaskDetailsComponent},
   {path: 'comments/:id', component: CommentsComponent},
-  {path: 'attachments/:id', component: AttachmentsComponent}
+  {path: 'attachments/:id', component: AttachmentsComponent},
+  {path: 'schedules', component: ScheduleListComponent},
+  {path: 'add-schedule', component: AddScheduleComponent},
+  {path: 'edit-schedule/:id', component: EditScheduleComponent}
 ];

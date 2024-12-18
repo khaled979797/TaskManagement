@@ -17,8 +17,12 @@ namespace TaskManagement.Core.Features.Schedules.Commands.Validators
                 .NotEmpty().WithMessage("Id should not be empty")
                 .NotNull().WithMessage("Id should not be null");
 
+            RuleFor(x => x.Message)
+                .NotEmpty().WithMessage("Message should not be empty")
+                .NotNull().WithMessage("Message should not be null");
+
             RuleFor(x => x.NotifyDate)
-                .LessThanOrEqualTo(DateTime.Now)
+                .GreaterThanOrEqualTo(DateTime.Now)
                 .NotEmpty().WithMessage("NotifyDate should not be empty")
                 .NotNull().WithMessage("NotifyDate should not be null");
         }
