@@ -57,7 +57,6 @@ namespace TaskManagement.Api.Controllers
             var response = await Mediator.Send(new UncompleteAssignmentCommand(id));
             return NewResult(response);
         }
-
         #endregion
 
         #region Queries
